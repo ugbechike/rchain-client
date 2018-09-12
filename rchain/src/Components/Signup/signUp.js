@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import { Button, Form, Input, Icon, Responsive, Message } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios'
 
 class SignUp extends Component {
 
@@ -32,117 +33,116 @@ class SignUp extends Component {
         });
     };
 
-    // handleSubmit = (e) => {
-    //     e.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
 
-    //     let { firstName, lastName, email, username, password, confirmPassword, errors, user} = this.state;
+        let { name, email, username, password, confirmPassword, errors, user} = this.state;
 
-    //     this.setState({
-    //         loading: true
-    //     })
+        this.setState({
+            loading: true
+        })
         
         
-    //     if(/^([a-z0-9-_.]+\@[a-z0-9-.]+\.[a-z]{2,4})$/g.test(email)){
+        if(/^([a-z0-9-_.]+\@[a-z0-9-.]+\.[a-z]{2,4})$/g.test(email)){
             
 
-    //         if(username.length >= 3 && username.length <= 15){
-    //             if(password.length >= 6){
-    //                 if(password === confirmPassword){
-    //                     /**HANDLE REQUEST TO SIGN UP */
+            if(username.length >= 3 && username.length <= 15){
+                if(password.length >= 6){
+                    if(password === confirmPassword){
+                        /**HANDLE REQUEST TO SIGN UP */
 
-    //                     let user = { firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim(), username: username.trim(), password, confirmPassword };
+                        let user = { name: name.trim(), email: email.trim(), username: username.trim(), password, confirmPassword };
                         
-    //                     REQ_POST('users/register', user)
-    //                         .then(res => {
-
-    //                             if(res){
-    //                                 if(res.data){
-    //                                     if(res.data.code == 1) {
-    //                                         errors.message = "Email or Username already in use";
-    //                                         this.setState({
-    //                                             visible: false
-    //                                         })
-    //                                     }else {
+                        axios.post('https://virtualserver.herokuapp.com/users/register', user)
+                            .then(res => {
+                                    console.log(res)
+                                if(res){
+                                    if(res.data){
+                                        if(res.data.code == 1) {
+                                            errors.message = "Email or Username already in use";
+                                            this.setState({
+                                                visible: false
+                                            })
+                                        }else {
                                             
-    //                                         /** HANDLE ALL ROUTING WHEN USER REGISERS SUCCESSFULLY
-    //                                         **/
+                                            /** HANDLE ALL ROUTING WHEN USER REGISERS SUCCESSFULLY
+                                            **/
 
-    //                                         let user = [res.data.user, res.data.isAdmin];
-    //                                         localStorage.setItem('user', JSON.stringify(user));
+                                            let user = [res.data.user, res.data.isAdmin];
+                                            localStorage.setItem('user', JSON.stringify(user));
 
-    //                                         this.props.history.push("/auth/user");
-    //                                     }
-    //                                 }else {
-    //                                     alert('Error in network connection, try again')
-    //                                 }
-    //                             }else {
-    //                                 alert('Error in network connection, try again');
-    //                             }
+                                            this.props.history.push("/auth/user");
+                                        }
+                                    }else {
+                                        alert('Error in network connection, try again')
+                                    }
+                                }else {
+                                    alert('Error in network connection, try again');
+                                }
 
-    //                             this.setState({
-    //                                 firstName: '',
-    //                                 lastName: '',
-    //                                 email: '',
-    //                                 username: '',
-    //                                 password: '',
-    //                                 confirmPassword: '',
-    //                                 loading: false
-    //                             })
-    //                         })
+                                this.setState({
+                                    name: '',
+                                    email: '',
+                                    username: '',
+                                    password: '',
+                                    confirmPassword: '',
+                                    loading: false
+                                })
+                            })
                         
-    //                 }else {
+                    }else {
 
-    //                     errors.message = "password does not match";
+                        errors.message = "password does not match";
 
                         
 
-    //                     this.setState({
-    //                         password: '',
-    //                         confirmPassword: '',
-    //                         loading: false,
-    //                         visible: false
-    //                     })
+                        this.setState({
+                            password: '',
+                            confirmPassword: '',
+                            loading: false,
+                            visible: false
+                        })
                         
-    //                 }
-    //             }else {
+                    }
+                }else {
                     
-    //                 errors.message = 'Minimum length for password is 6 characters';
+                    errors.message = 'Minimum length for password is 6 characters';
 
-    //                 this.setState({
-    //                     password: '',
-    //                     confirmPassword: '',
-    //                     loading: false,
-    //                     visible: false
-    //                 })
-    //             }
-    //         }else {
+                    this.setState({
+                        password: '',
+                        confirmPassword: '',
+                        loading: false,
+                        visible: false
+                    })
+                }
+            }else {
                 
-    //             errors.message = 'Minimum length for username is 3 and maximum is 15';
+                errors.message = 'Minimum length for username is 3 and maximum is 15';
 
-    //             this.setState({
-    //                 password: '',
-    //                 confirmPassword: '',
-    //                 username: '',
-    //                 loading: false,
-    //                 visible: false
-    //             })
-    //         }
+                this.setState({
+                    password: '',
+                    confirmPassword: '',
+                    username: '',
+                    loading: false,
+                    visible: false
+                })
+            }
 
-    //     }else {
-    //         errors.message = "Invalid email format";
+        }else {
+            errors.message = "Invalid email format";
 
             
 
-    //         this.setState({
-    //             email: '',
-    //             password: '',
-    //             confirmPassword: '',
-    //             loading: false,
-    //             visible: false
-    //         })
-    //     }
+            this.setState({
+                email: '',
+                password: '',
+                confirmPassword: '',
+                loading: false,
+                visible: false
+            })
+        }
 
-    // }
+    }
 
     /**   HANDLE ERROR MESSAGE FOR LOGIN   */
       handleDismiss = () => {
@@ -177,7 +177,9 @@ class SignUp extends Component {
             justifyContent: 'center',
             alignItems: 'center',
             width: '100%',
-            zIndex: '0'
+            zIndex: '0',
+            // boxShadow: '0 0 0 1px #57022f inset',
+            // color: '#57022f !important'
         };
 
         const formContainer = {
@@ -224,7 +226,7 @@ class SignUp extends Component {
                             <Form.Field
                                 id='name'
                                 control={Input}
-                                placeholder='name'
+                                placeholder='FullName'
                                 onChange={this.handleChange}
                                 required
                                 value={name}
@@ -271,7 +273,7 @@ class SignUp extends Component {
 
                                 />
                             </Form.Group>
-                            <Button basic color='blue' style={btn} animated='vertical'>
+                            <Button basic color='red' style={btn} animated='vertical'>
                                 <Button.Content hidden>
                                     Sign Up
                                 </Button.Content>
@@ -311,7 +313,7 @@ class SignUp extends Component {
                     <Segment attached='bottom'>
                         <Form style={formContainer} onSubmit={this.handleSubmit} loading={loading} >
                             <Form.Field
-                                id='email'
+                                id='name'
                                 control={Input}
                                 placeholder='name'
                                 onChange={this.handleChange}
@@ -319,6 +321,15 @@ class SignUp extends Component {
                                 value={name}
                             />
                           
+                          <Form.Field
+                              id='username'
+                              control={Input}
+                              placeholder='Username'
+                              onChange={this.handleChange}
+                              required
+                              value={username}
+                          />
+                           
                             <Form.Field
                                 id='email'
                                 control={Input}
@@ -327,14 +338,6 @@ class SignUp extends Component {
                                 onChange={this.handleChange}
                                 required
                                 value={email}
-                            />
-                            <Form.Field
-                                id='username'
-                                control={Input}
-                                placeholder='Username'
-                                onChange={this.handleChange}
-                                required
-                                value={username}
                             />
                             <Form.Group widths='equal'  >
                                 <Form.Field
@@ -358,7 +361,7 @@ class SignUp extends Component {
 
                                 />
                             </Form.Group>
-                            <Button basic color='blue' style={btn} animated='vertical'>
+                            <Button basic color='red'  style={btn} animated='vertical'>
                                 <Button.Content hidden>
                                     Sign Up
                                 </Button.Content>

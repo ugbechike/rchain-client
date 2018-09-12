@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 
-class SignIn extends Component {
+class ForgotPassword extends Component {
     constructor(props){
       super(props);
   
@@ -147,10 +147,10 @@ class SignIn extends Component {
                 <Menu attached='top' tabular>
                     <Menu.Item 
                         style={menu}
-                        name='Log In' 
-                        active={activeItem === 'Log In'} 
+                        name='Reset' 
+                        active={activeItem === 'Reset'} 
                         as={Link}
-                        to="/login"
+                        to="/reset"
                     />
                     <Menu.Item
                         style={menu}
@@ -173,7 +173,7 @@ class SignIn extends Component {
                             />
                         </Form.Field>
 
-                        <Form.Field style={{width: '90%'}} >
+                        {/* <Form.Field style={{width: '90%'}} >
                             <Input 
                             id="password" 
                             placeholder='Password' 
@@ -182,16 +182,15 @@ class SignIn extends Component {
                             value={password} 
                             required 
                             />
-                        </Form.Field>
+                        </Form.Field> */}
                         <Button basic color='red' style={btn} animated='vertical'  >
                           <Button.Content hidden>
-                              Log In
+                              Reset
                           </Button.Content>
                           <Button.Content visible>
                               <Icon name='sign in' />
                           </Button.Content>
                         </Button>
-                        <p>Forgot password? click<Link to='/reset'> here</Link></p>
                     </Form>
                 </Segment>
               </Responsive>
@@ -207,10 +206,10 @@ class SignIn extends Component {
                 <Menu attached='top' tabular>
                     <Menu.Item 
                         style={menu}
-                        name='Log In' 
-                        active={activeItem === 'Log In'} 
+                        name='Reset' 
+                        active={activeItem === 'Reset'} 
                         as={Link}
-                        to="/login"
+                        to="/reset"
                     />
                     <Menu.Item
                         style={menu}
@@ -244,7 +243,7 @@ class SignIn extends Component {
                         </Form.Field>
                         <Button basic color='red' style={btn} animated='vertical'  >
                           <Button.Content hidden>
-                              Log In
+                              Reset
                           </Button.Content>
                           <Button.Content visible>
                               <Icon name='sign in' />
@@ -258,5 +257,5 @@ class SignIn extends Component {
         )
     }
 }
-export default withRouter(SignIn);
+export default withRouter(ForgotPassword);
 
