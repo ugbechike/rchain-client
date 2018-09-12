@@ -1,3 +1,3 @@
-# rchain-client
+﻿# rchain-client
 
-learning platform using reactjs
+learn platform using reactjs
