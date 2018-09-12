@@ -3,6 +3,8 @@ import { Menu, Segment } from 'semantic-ui-react'
 import { Button, Form, Icon, Responsive, Input, Message } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import Footer from '../Menu/footer';
+import TopNav from '../Menu/nav';
 
 
 class SignIn extends Component {
@@ -52,35 +54,14 @@ class SignIn extends Component {
             /**REVIEW THIS TO HANDLE EVERY LOGIN REQUEST */
 
             axios.post(`https://ogenetv.herokuapp.com/users/login`, {email: email.trim(),password})
-            .then(res => {
-                    console.log(res)
-                // if(res.data){
-                //   //ONLY USE RES FOR SUCCESS AND RES.RESPONSE FOR ERROR HANDLING
-                //   if(res.response){
-                //     this.setState({
-                //       error: 'Please register an account or use valid details to login',
-                //       visible: false
-                //     })
-                //   }else if(res.data){
-                //     let user = [res.data.message.passport.user, res.data.isAdmin];
-                //     localStorage.setItem('user', JSON.stringify(user));
-                //         console.log(user)
-                //     this.setState({
-                //       loggedIn: true
-                //     });
-
-                //     this.props.history.push("/auth/user");
-                //   }
-                // }else {
-                //   alert('Error in network connection, try again');
-                // }
-
-                this.setState({
-                  email: '',
-                  password: '',
-                  loading: false
-                })
-            })
+              .then(res => {
+                      console.log(res)
+                  this.setState({
+                    email: '',
+                    password: '',
+                    loading: false
+                  })
+              })
 
         }
       }
@@ -134,7 +115,7 @@ class SignIn extends Component {
 
         return (
             <div>
-              
+              <TopNav />
               <Responsive style={container}  minWidth={Responsive.onlyTablet.minWidth}>
                 {
                   error && (
@@ -250,10 +231,11 @@ class SignIn extends Component {
                               <Icon name='sign in' />
                           </Button.Content>
                         </Button>
+                        <p>Forgot password? click<Link to='/reset'> here</Link></p>
                     </Form>
                 </Segment>
             </Responsive>
-           
+           <Footer />
           </div>
         )
     }
