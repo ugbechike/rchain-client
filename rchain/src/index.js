@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import Container from './Components/container';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Index = () => {
+    return (
+        <BrowserRouter>
+            <Container />
+        </BrowserRouter>
+    )
+}
+
+ReactDOM.render(<Index />, document.getElementById('root'));
 registerServiceWorker();
