@@ -6,6 +6,7 @@ import NotFound from './notFound';
 import SignIn from './Signin/signIn';
 import SignUp from './Signup/signUp';
 import ForgotPassword from './ForgotPassword/forgotPassword';
+import ListCourses from './Course/listCourse';
 
 class Container extends Component {
 
@@ -14,6 +15,7 @@ class Container extends Component {
 			<div>
 				<Responsive>
 					<Switch>
+			            <Route path="/courses" component={ListCourses} exact />
 			            <Route path="/signup" component={SignUp} exact />
 			            <Route path="/login" component={SignIn} exact/>
 			            <Route path="/reset" component={ForgotPassword} exact/>
