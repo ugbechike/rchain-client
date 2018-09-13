@@ -60,7 +60,7 @@ class ListCourseHome extends Component {
                                   </Card.Content>
                                   <Card.Content extra>
                                     <div className='ui two buttons'>
-                                      <Button basic color='green' onClick={() => this.handleClick(course._id)}>
+                                      <Button basic color='red' onClick={() => this.handleClick(course._id)}>
                                         Take Course
                                       </Button>
                                     </div>

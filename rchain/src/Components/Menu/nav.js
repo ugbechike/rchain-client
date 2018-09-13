@@ -80,7 +80,7 @@ class TopNav extends Component {
                                     <Icon name='user' />
                                 </Button.Content>
                             </Button>
-                            <Button basic color='red' style={btn} animated='vertical' >
+                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to='/login' >
                                 <Button.Content hidden>
                                     Log In
                                 </Button.Content>
@@ -88,7 +88,7 @@ class TopNav extends Component {
                                     <Icon name='sign in' />
                                 </Button.Content>
                             </Button>
-                            <Button basic color='red' style={btn} animated='vertical' >
+                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to='/signup' >
                                 <Button.Content hidden>
                                     Sign Up
                                 </Button.Content>
