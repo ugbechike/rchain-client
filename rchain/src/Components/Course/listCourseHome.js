@@ -35,6 +35,7 @@ class ListCoursesHome extends Component {
 
     handleClick = (id) => {
         //handle course taking here
+        this.props.history.push(`/course/${id}`);
     }
 
     render() {
