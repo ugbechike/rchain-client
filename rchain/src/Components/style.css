@@ -1,0 +1,18 @@
+
+.ui.basic.button {
+	color: #b35959 !important;
+	background-color: transparent !important;
+	box-shadow: none;
+}
+
+.ui.basic.active.button {
+	color: #b35959 !important;
+}
+
+.hidden.content {
+	color: #b35959 !important;
+}
+
+.text-color {
+	color: #b35959 !important;
+}

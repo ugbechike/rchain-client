@@ -5,6 +5,7 @@ import axios from 'axios';
 import { API_URL } from '../../config';
 import TopNav from '../Menu/nav';
 import Footer from '../Menu/footer';
+import '../style.css';
 
 class ListCourses extends Component {
 
@@ -65,7 +66,7 @@ class ListCourses extends Component {
                                   </Card.Content>
                                   <Card.Content extra>
                                     <div className='ui two buttons'>
-                                      <Button basic color='red' onClick={() => this.handleClick(course._id)}>
+                                      <Button basic style={{border:'1px solid #b35959'}} className="text-color" onClick={() => this.handleClick(course._id)}>
                                         Take Course
                                       </Button>
                                     </div>

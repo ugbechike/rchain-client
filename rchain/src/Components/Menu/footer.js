@@ -82,7 +82,7 @@ class Footer extends Component {
                         <List.Item >
                         <Input labelPosition="right" value={this.state.email}  placeholder='email@example.com'  type='email' onChange={this.handleChange}>
                           <input />
-                          <Label style={{cursor:'pointer', color:'white', border:'1px solid red', backgroundColor:'transparent' }} onClick={this.handleSubscribe}>Subscribe</Label>
+                          <Label style={{cursor:'pointer', color:'white', border:'2px solid #b35959', backgroundColor:'transparent' }} onClick={this.handleSubscribe}>Subscribe</Label>
                         </Input>
                         </List.Item>
                       </List>

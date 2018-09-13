@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Menu, Button, Icon, Responsive, Sidebar, Image } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import logo from '../../Assets/logo_red.png';
+import '../style.css';
 
 class TopNav extends Component {
     constructor(props){
@@ -38,7 +39,8 @@ class TopNav extends Component {
             marginRight: '5px',
             marginLeft: '5px',
             width: '120px',
-            boxShadow: '0 0 0 1px #57022f inset'
+            border:'1px solid #b35959',
+            color: '#b35959'
         };
     
         const container = {
@@ -64,7 +66,7 @@ class TopNav extends Component {
             
                         <Menu.Item className="container" position='right' style={{position: 'initial'}}>
 
-                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to="/courses" >
+                            <Button basic style={btn} animated='vertical' as={NavLink} to="/courses" >
                                 <Button.Content hidden>
                                     Courses
                                 </Button.Content>
@@ -72,7 +74,7 @@ class TopNav extends Component {
                                     <Icon name='video play' />
                                 </Button.Content>
                             </Button>
-                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to="/">
+                            <Button basic style={btn} animated='vertical' as={NavLink} to="/user">
                                 <Button.Content hidden>
                                     Dashboard
                                 </Button.Content>
@@ -80,7 +82,7 @@ class TopNav extends Component {
                                     <Icon name='user' />
                                 </Button.Content>
                             </Button>
-                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to='/login' >
+                            <Button basic style={btn} animated='vertical' as={NavLink} to='/login' >
                                 <Button.Content hidden>
                                     Log In
                                 </Button.Content>
@@ -88,7 +90,7 @@ class TopNav extends Component {
                                     <Icon name='sign in' />
                                 </Button.Content>
                             </Button>
-                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to='/signup' >
+                            <Button basic style={btn} animated='vertical' as={NavLink} to='/signup' >
                                 <Button.Content hidden>
                                     Sign Up
                                 </Button.Content>
