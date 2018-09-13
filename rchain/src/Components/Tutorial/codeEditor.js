@@ -20,38 +20,36 @@ class CodeEditor extends Component{
             <div>
                 
                 <Grid divided='vertically'>
-                    <Grid.Row columns={2}>
-                        <Grid.Column style={{padding: '0'}}>
-                        <Form>
-                            <TextArea placeholder=''
-                                        spellCheck='false'
-                                        wrap='logical'
-                                style={{ 
-                                    minHeight: '565px', 
-                                    width: '100%', 
-                                    caretColor: 'rgb(142, 153, 144)',
-                                    backgroundColor: '#734444',
-                                    color: '#909c90',
-                                    fontSize: '17px',
-                                    position: 'fixed',
-                                    bottom: '0',
-                                    borderRadius: '0'
-                                }} 
-                            />
-                            
-                            <Button primary loading={loading} content='Run Code' labelPosition='left' icon='code' onClick={this.handleRun} style={{marginTop: '15px', marginLeft: '18px', position: 'fixed', bottom: '6px'}} />
-                            
-                        </Form>
+                    <Grid.Row>
+                        <Grid.Column width={8} style={{padding: '0'}}>
+                                <TextArea placeholder=''
+                                            spellCheck='false'
+                                            wrap='logical'
+                                    style={{ 
+                                        minHeight: '640px', 
+                                        width: '100%', 
+                                        caretColor: 'rgb(142, 153, 144)',
+                                        backgroundColor: '#734444',
+                                        color: '#909c90',
+                                        fontSize: '17px',
+                                        position: 'fixed',
+                                        top: '70px',
+                                        borderRadius: '0'
+                                    }} 
+                                />
+                                
+                                <Button primary loading={loading} content='Run Code' labelPosition='left' icon='code' onClick={this.handleRun} style={{marginTop: '15px', marginLeft: '18px', position: 'fixed', bottom: '6px'}} />
+                                
                         </Grid.Column>
-                        <Grid.Column style={{padding: '0'}}>
+                        <Grid.Column width={8} style={{padding: '0'}}>
                             <div>
                                 <iframe name='iframeResult'
                                     style={{
                                         width: '100%',
-                                        minHeight: '565px',
+                                        minHeight: '640px',
                                         backgroundColor: 'gray',
                                         position: 'fixed',
-                                        bottom: '0'
+                                        top: '70px'
                                     }}
                                 />
                             </div>
