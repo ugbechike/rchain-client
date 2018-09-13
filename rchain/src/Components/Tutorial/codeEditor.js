@@ -27,14 +27,14 @@ class CodeEditor extends Component{
                                         spellCheck='false'
                                         wrap='logical'
                                 style={{ 
-                                    minHeight: '565px', 
+                                    minHeight: '640px', 
                                     width: '100%', 
                                     caretColor: 'rgb(142, 153, 144)',
                                     backgroundColor: '#734444',
                                     color: '#909c90',
                                     fontSize: '17px',
                                     position: 'fixed',
-                                    bottom: '0',
+                                    top: '70px',
                                     borderRadius: '0'
                                 }} 
                             />
@@ -48,10 +48,10 @@ class CodeEditor extends Component{
                                 <iframe name='iframeResult'
                                     style={{
                                         width: '100%',
-                                        minHeight: '565px',
+                                        minHeight: '640px',
                                         backgroundColor: 'gray',
                                         position: 'fixed',
-                                        bottom: '0'
+                                        top: '70px'
                                     }}
                                 />
                             </div>
