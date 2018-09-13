@@ -29,7 +29,7 @@ class CodeEditor extends Component{
                                         
                                 style={{ 
                                     minHeight: '640px', 
-                                    width: '100%', 
+                                    width: '31%', 
                                     caretColor: 'rgb(142, 153, 144)',
                                     backgroundColor: '#734444',
                                     color: '#909c90',
