@@ -57,8 +57,8 @@ const Footer = (props) => {
                   <Grid.Column width={4}>
                     <Header inverted as='h4' content='Contact Us' />
                     <List link inverted>
-                      <List.Item as='a'>+2348103221543</List.Item>
-                      <List.Item as='a' href="mailto:info@virtualdojo.com">info@virtualdojo.com</List.Item>
+                      {/* <List.Item as='a'>+2348103221543</List.Item> */}
+                      <List.Item as='a' href="mailto:info@rchaincoop.com">info@rchaincoop.com</List.Item>
                     </List>
                   </Grid.Column>
 

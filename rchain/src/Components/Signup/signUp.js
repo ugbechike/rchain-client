@@ -3,8 +3,13 @@ import { Menu, Segment } from 'semantic-ui-react'
 import { Button, Form, Input, Icon, Responsive, Message } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+<<<<<<< HEAD
 import Footer from '../Menu/footer';
 import TopNav from '../Menu/nav';
+=======
+import TopNav from '../Menu/nav'
+import Footer from '../Menu/footer'
+>>>>>>> master
 
 class SignUp extends Component {
 
@@ -197,7 +202,7 @@ class SignUp extends Component {
 
         return (
             <div>
-                <TopNav />
+                <TopNav/>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth} style={container} >
                     {
                       errors && (
