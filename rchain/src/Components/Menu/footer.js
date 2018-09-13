@@ -40,22 +40,12 @@ class Footer extends Component {
     }
     return (
       <Responsive style={container}>
-        <Segment vertical style={{ padding: '0px' }}>
+        <Segment vertical style={{ padding: '0px', paddingTop: '0px' }}>
               <Container>
                 <Grid inverted stackable style={{width: '100%'}}>
                   <Grid.Row>
   
-                    <Grid.Column width={4}>
-                      <Header inverted as='h4' content='Popular Categories' />
-                      <List link inverted>
-                        <List.Item as="a">Front-end Development</List.Item>
-                        <List.Item as="a">Back-end Development</List.Item>
-                        <List.Item as="a">Github</List.Item>
-                        <List.Item as="a">Product Design</List.Item>
-                      </List>
-                    </Grid.Column>
-  
-                    <Grid.Column width={4}>
+                    <Grid.Column width={5}>
                       <Header inverted as='h4' content='Popular Courses' />
                       <List link inverted>
                         <List.Item as="a" >Learn React</List.Item>
@@ -65,14 +55,14 @@ class Footer extends Component {
                       </List>
                     </Grid.Column>
   
-                    <Grid.Column width={4}>
+                    <Grid.Column width={5}>
                       <Header inverted as='h4' content='Who we are' />
                       <List link inverted>
                         <List.Item >About Us</List.Item>
                       </List>
                     </Grid.Column>
   
-                    <Grid.Column width={4}>
+                    <Grid.Column width={6}>
                       <Header inverted as='h4' content='Contact Us' />
                       <List link inverted>
                         {/* <List.Item as='a'>+2348103221543</List.Item> */}

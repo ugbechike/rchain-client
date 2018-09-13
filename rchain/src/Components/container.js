@@ -7,6 +7,7 @@ import SignIn from './Signin/signIn';
 import SignUp from './Signup/signUp';
 import ForgotPassword from './ForgotPassword/forgotPassword';
 import ListCourses from './Course/listCourse';
+import Tutorial from '../Components/Tutorial/tutorial';
 
 class Container extends Component {
 
@@ -15,6 +16,7 @@ class Container extends Component {
 			<div>
 				<Responsive>
 					<Switch>
+			            <Route path="/course/:id" component={Tutorial} exact />
 			            <Route path="/courses" component={ListCourses} exact />
 			            <Route path="/signup" component={SignUp} exact />
 			            <Route path="/login" component={SignIn} exact/>
