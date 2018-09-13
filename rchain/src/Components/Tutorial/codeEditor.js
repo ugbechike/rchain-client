@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {  Grid, Button, Form, TextArea, TableHeader } from 'semantic-ui-react'
 import '../style.css';
 
-class codeEditor extends Component{
+class CodeEditor extends Component{
     state={
         loading: false
     }
@@ -24,20 +24,22 @@ class codeEditor extends Component{
                         <Grid.Column style={{padding: '0'}}>
                         <Form>
                             <TextArea placeholder=''
-                                        spellcheck='false'
+                                        spellCheck='false'
                                         wrap='logical'
-                                style={{ minHeight: 600, width: '100%', 
-                                    caretColor: 'red',
-                                    caretColor: '#ff0000',
-                                    caretColor: 'rgb(255, 0, 0)',
-                                    caretColor: 'hsl(0, 97%, 50%)',
-                                    backgroundColor: 'black',
+                                style={{ 
+                                    minHeight: '565px', 
+                                    width: '100%', 
+                                    caretColor: 'rgb(142, 153, 144)',
+                                    backgroundColor: '#734444',
                                     color: '#909c90',
-                                    fontSize: '20px',
+                                    fontSize: '17px',
+                                    position: 'fixed',
+                                    bottom: '0',
+                                    borderRadius: '0'
                                 }} 
                             />
                             
-                            <Button loading={loading} content='Run Code' labelPosition='left' icon='code' onClick={this.handleRun} style={{marginTop: '15px', marginLeft: '18px'}} />
+                            <Button primary loading={loading} content='Run Code' labelPosition='left' icon='code' onClick={this.handleRun} style={{marginTop: '15px', marginLeft: '18px', position: 'fixed', bottom: '6px'}} />
                             
                         </Form>
                         </Grid.Column>
@@ -46,8 +48,10 @@ class codeEditor extends Component{
                                 <iframe name='iframeResult'
                                     style={{
                                         width: '100%',
-                                        minHeight: '600px',
-                                        backgroundColor: 'gray'
+                                        minHeight: '565px',
+                                        backgroundColor: 'gray',
+                                        position: 'fixed',
+                                        bottom: '0'
                                     }}
                                 />
                             </div>
@@ -62,4 +66,4 @@ class codeEditor extends Component{
     }
 }
  
-export default codeEditor
+export default CodeEditor

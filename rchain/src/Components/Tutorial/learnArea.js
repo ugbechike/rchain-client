@@ -5,7 +5,7 @@ import Comment from './comment';
 class LearnArea extends Component {
 	render() {
 		return (
-			<div style={{marginTop: '70px'}}>
+			<div style={{marginTop: '70px', overFlowY: 'scroll'}}>
 		        <Video />
 			</div>
 		);

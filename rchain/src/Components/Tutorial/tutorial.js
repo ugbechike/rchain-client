@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopNav from '../Menu/nav';
 import LearnArea from './learnArea';
+import PracticeArea from './practiceArea';
 import { Grid } from 'semantic-ui-react';
 
 class Tutorial extends Component {
@@ -15,10 +16,10 @@ class Tutorial extends Component {
 					<Grid>
 					    <Grid.Row>
 					      <Grid.Column width={7}>
-						      <LearnArea />
+						      	<LearnArea />
 					      </Grid.Column>
-					      <Grid.Column width={9}>
-					        practice area
+					      <Grid.Column width={9} style={{padding: '0'}}>
+					        	<PracticeArea />
 					      </Grid.Column>
 					    </Grid.Row>
 					</Grid>
