@@ -3,6 +3,8 @@ import { Menu, Segment } from 'semantic-ui-react'
 import { Button, Form, Icon, Responsive, Input, Message } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import TopNav from '../Menu/nav'
+import Footer from '../Menu/footer'
 
 
 class SignIn extends Component {
@@ -134,7 +136,7 @@ class SignIn extends Component {
 
         return (
             <div>
-              
+              <TopNav/>
               <Responsive style={container}  minWidth={Responsive.onlyTablet.minWidth}>
                 {
                   error && (
@@ -253,7 +255,7 @@ class SignIn extends Component {
                     </Form>
                 </Segment>
             </Responsive>
-           
+           <Footer/>
           </div>
         )
     }

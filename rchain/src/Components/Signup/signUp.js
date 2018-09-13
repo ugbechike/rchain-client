@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import { Button, Form, Input, Icon, Responsive, Message } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
+import TopNav from '../Menu/nav'
+import Footer from '../Menu/footer'
 
 class SignUp extends Component {
 
@@ -195,7 +197,7 @@ class SignUp extends Component {
 
         return (
             <div>
-                
+                <TopNav/>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth} style={container} >
                     {
                       errors && (
@@ -372,7 +374,7 @@ class SignUp extends Component {
                         </Form>
                     </Segment>
                 </Responsive >
-               
+               <Footer/>
             </div>
         )
     }

@@ -18,7 +18,7 @@ export class Home extends PureComponent {
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      height: '600px',
+      height: '360px',
       width: '100%',
       display: 'flex', 
       alignItems: 'center'
