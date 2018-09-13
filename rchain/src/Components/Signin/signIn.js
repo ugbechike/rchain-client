@@ -3,13 +3,8 @@ import { Menu, Segment } from 'semantic-ui-react'
 import { Button, Form, Icon, Responsive, Input, Message } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
-<<<<<<< HEAD
 import Footer from '../Menu/footer';
 import TopNav from '../Menu/nav';
-=======
-import TopNav from '../Menu/nav'
-import Footer from '../Menu/footer'
->>>>>>> master
 
 
 class SignIn extends Component {
@@ -42,8 +37,6 @@ class SignIn extends Component {
         e.preventDefault();
 
         const { email, password, user } = this.state;
-
-        let trimEmail = email.trim();
 
         this.setState({
           loading: true

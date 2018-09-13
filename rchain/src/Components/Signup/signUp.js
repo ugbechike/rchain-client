@@ -1,15 +1,11 @@
-import React, { Component } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
-import { Button, Form, Input, Icon, Responsive, Message } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Menu, Segment } from 'semantic-ui-react';
+import { Button, Form, Input, Icon, Responsive, Message } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
+import { API_URL } from '../../config';
 import axios from 'axios';
-<<<<<<< HEAD
-import Footer from '../Menu/footer';
 import TopNav from '../Menu/nav';
-=======
-import TopNav from '../Menu/nav'
-import Footer from '../Menu/footer'
->>>>>>> master
+import Footer from '../Menu/footer';
 
 class SignUp extends Component {
 
@@ -60,7 +56,7 @@ class SignUp extends Component {
 
                         let user = { name: name.trim(), email: email.trim(), username: username.trim(), password, confirmPassword };
                         
-                        axios.post('https://virtualserver.herokuapp.com/users/register', user)
+                        axios.post(`${API_URL}/users/register`, user)
                             .then(res => {
                                     console.log(res)
                                 if(res){

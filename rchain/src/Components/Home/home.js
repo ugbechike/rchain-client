@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Responsive } from 'semantic-ui-react';
 import Footer from '../Menu/footer';
 import TopNav from '../Menu/nav';
 import headerImage from '../../Assets/rc.png';
@@ -18,7 +19,7 @@ export class Home extends PureComponent {
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      height: '360px',
+      height: '580px',
       width: '100%',
       display: 'flex', 
       alignItems: 'center'
@@ -29,9 +30,12 @@ export class Home extends PureComponent {
         <TopNav />
 
         <div style={{marginTop: '70px'}}>
-          <div style={header}>
+          <Responsive style={header} minWidth={Responsive.onlyTablet.minWidth}>
 
-          </div>
+          </Responsive>
+          <Responsive style={{...header, height: '410px'}} maxWidth={Responsive.onlyMobile.maxWidth}>
+
+          </Responsive>
 
           <ListCourseHome />
         </div>
