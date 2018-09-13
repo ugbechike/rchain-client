@@ -21,7 +21,6 @@ class Container extends Component {
 			            <Route path="/reset" component={ForgotPassword} exact/>
 						<Route path="/" component={Home} />
 						<Route component={NotFound} />
-
 					</Switch>
 				</Responsive>
 			</div>
