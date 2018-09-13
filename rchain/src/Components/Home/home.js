@@ -4,7 +4,7 @@ import { Responsive } from 'semantic-ui-react';
 import Footer from '../Menu/footer';
 import TopNav from '../Menu/nav';
 import headerImage from '../../Assets/rc.png';
-import ListCourseHome from '../Course/listCourseHome';
+import ListCoursesHome from '../Course/listCourseHome';
 
 export class Home extends PureComponent {
 
@@ -37,7 +37,7 @@ export class Home extends PureComponent {
 
           </Responsive>
 
-          <ListCourseHome />
+          <ListCoursesHome />
         </div>
 
         <Footer />

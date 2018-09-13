@@ -3,8 +3,10 @@ import { Link, withRouter } from 'react-router-dom';
 import { List, Image, Loader, Card, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { API_URL } from '../../config';
+import TopNav from '../Menu/nav';
+import Footer from '../Menu/footer';
 
-class ListCoursesHome extends Component {
+class ListCourses extends Component {
 
     constructor(props) {
         super(props);
@@ -16,15 +18,17 @@ class ListCoursesHome extends Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0);
+
         this.setState({
             loading: true
         })
 
-        this.getLatestCourses();
+        this.getCourses();
     }
 
-    getLatestCourses = () => {
-        axios.get(`${API_URL}/category/getlatest/6`)
+    getCourses = () => {
+        axios.get(`${API_URL}/category/get`)
             .then(res => {
                 this.setState({
                     courses: res.data,
@@ -42,8 +46,9 @@ class ListCoursesHome extends Component {
 
         return (
             <div>
+                <TopNav />
                 <Loader style={{zIndex: '1', width: '90%', margin: 'auto', marginTop: '90px', marginBottom: '0px'}} active={loading} inline='centered' />
-                <Card.Group centered stackable  style={{zIndex: '0', width: '90%', margin: 'auto', marginTop: '70px'}}>
+                <Card.Group centered stackable  style={{zIndex: '0', width: '90%', margin: 'auto', marginTop: '90px'}}>
 
                     {
                         courses &&
@@ -70,9 +75,10 @@ class ListCoursesHome extends Component {
                         })
                     }
                 </Card.Group>
+                <Footer />
             </div>
         );
     }
 }
 
-export default withRouter(ListCoursesHome);
+export default withRouter(ListCourses);

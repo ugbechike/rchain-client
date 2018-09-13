@@ -64,7 +64,7 @@ class TopNav extends Component {
             
                         <Menu.Item className="container" position='right' style={{position: 'initial'}}>
 
-                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to="/" >
+                            <Button basic color='red' style={btn} animated='vertical' as={NavLink} to="/courses" >
                                 <Button.Content hidden>
                                     Courses
                                 </Button.Content>
@@ -103,10 +103,10 @@ class TopNav extends Component {
                     <Menu style={container} >
                         <Sidebar as={Menu} animation='slide along' inverted vertical visible={sidebarOpened} style={{background: 'rgb(88, 29, 46)'}}>
                             <Menu.Item as={Link} to="/" onClick={this.handleToggle} >Home</Menu.Item>
-                            <Menu.Item as={Link} to="/auth/course" onClick={this.handleToggle}>Courses</Menu.Item>
+                            <Menu.Item as={Link} to="/courses" onClick={this.handleToggle}>Courses</Menu.Item>
                             <Menu.Item as={Link} to="/auth/user" onClick={this.handleToggle} >Dashboard</Menu.Item>  
-                            <Menu.Item onClick={() => {this.handleLogOut(); this.handleToggle()}} >Log Out</Menu.Item>
-                            <Menu.Item onClick={() => {this.handleSignup(); this.handleToggle()}} >Sign Up</Menu.Item>
+                            <Menu.Item as={Link} to="/login" onClick={this.handleToggle} >Sign In</Menu.Item>
+                            <Menu.Item as={Link} to="/signup" onClick={this.handleToggle} >Sign Up</Menu.Item>
                         </Sidebar>
 
                         <Menu.Item className="container" as={NavLink} to="/" style={{background: 'none', position: 'initial'}}>
