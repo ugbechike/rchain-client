@@ -13,6 +13,14 @@
 	color: #b35959 !important;
 }
 
+.ui.primary.button {
+	background-color: #b35959;
+}
+
+.ui.primary.button:hover {
+	background-color: #b35959;
+}
+
 .text-color {
 	color: #b35959 !important;
 }
