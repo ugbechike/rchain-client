@@ -24,7 +24,7 @@ class ListCoursesHome extends Component {
     }
 
     getLatestCourses = () => {
-        axios.get(`${API_URL}/category/getlatest/6`)
+        axios.get(`${API_URL}/video/sort/6`)
             .then(res => {
                 this.setState({
                     courses: res.data,

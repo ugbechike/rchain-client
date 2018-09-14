@@ -64,7 +64,6 @@ class SignUp extends Component {
                                             /** HANDLE ALL ROUTING WHEN USER REGISERS SUCCESSFULLY
                                             **/
                                             let user = [res.data.user, res.data.isAdmin];
-                                            localStorage.setItem('user', JSON.stringify(user));
 
                                             this.props.history.push("/login");
                                         }else {

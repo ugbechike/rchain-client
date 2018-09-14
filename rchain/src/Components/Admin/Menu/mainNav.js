@@ -1,10 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Segment } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom';
 
 const handleLogout = (props) => {
-  localStorage.clear('user');
+  localStorage.clear('admin');
   props.history.push('/admin');
 }
 

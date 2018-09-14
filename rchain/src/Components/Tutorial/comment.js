@@ -18,11 +18,12 @@ class Commenting extends Component {
 
   componentDidMount() {
     this.getVideo();
+
   }
 
   //GET A PARTICULAR VIDEO
   getVideo = () => {
-    axios.get(`${API_URL}/video/get/5b8350dc18a1b100146e30a5`)
+    axios.get(`${API_URL}/video/get/${this.props.videoId}`)
       .then(res => {
           this.setState({
             comments: res.data.comment,
@@ -45,19 +46,23 @@ class Commenting extends Component {
       loading: true
     })
 
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = localStorage.getItem('user');
+
     let { newComment } = this.state;
     let { videoId } = this.props;
 
     let commenting = {
       video: videoId,
-      user_id: user[0],
+      user_id: user,
       comment: newComment
     }
 
-    axios.post(`${API_URL}/comment/add`, commenting)
+    axios.post(`${API_URL}/comment/addcomment`, commenting)
       .then(res => {
         if(res) {
+          console.log(res);
+          console.log(commenting)
+
           if(res.data){
             this.setState({
               loading: false
@@ -82,7 +87,7 @@ class Commenting extends Component {
                   <Comment key={comment.time} >
                     <Comment.Avatar as='a' src={comment.user_id.profile_pics} />
                     <Comment.Content>
-                      <Comment.Author>{`${comment.user_id.firstName} ${comment.user_id.lastName}`}</Comment.Author>
+                      <Comment.Author>{comment.user_id.username}</Comment.Author>
                       <Comment.Metadata>
                         <Time time={comment.time}/>
                       </Comment.Metadata>
