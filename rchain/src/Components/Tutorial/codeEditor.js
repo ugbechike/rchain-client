@@ -9,11 +9,7 @@ class CodeEditor extends Component{
         output: ''
     }
 
-    componentDidMount(){
-        this.ifr.onload = () => {
-        this.ifr.contentWindow.postMessage('hello', "*");
-        }
-    }
+  
 
     handleRun =()=>{
         let { codeValue, output } = this.state;
@@ -67,20 +63,23 @@ class CodeEditor extends Component{
                         </Grid.Column>
                         <Grid.Column width={8} style={{padding: '0'}}>
                             <div>
-                                {/* {output} */}
-                                <iframe name='iframeResult'
-                                placeholder='Result'
-                                sandbox='allow-scripts'
-                                ref={(f) => this.ifr = f }
-                                    style={{
-                                        color:'white',
-                                        width: '100%',
-                                        minHeight: '640px',
+                                
+                            <TextArea disabled placeholder='Result'
+                                            spellCheck='false'
+                                            wrap='logical'
+                                            value={output}
+                                    style={{ 
+                                        minHeight: '640px', 
+                                        width: '100%', 
                                         backgroundColor: '#1a1a1a',
+                                        color: '#909c90',
+                                        fontSize: '17px',
                                         position: 'fixed',
-                                        top: '70px'
-                                    }}
+                                        top: '70px',
+                                        borderRadius: '0'
+                                    }} 
                                 />
+
                             </div>
                         </Grid.Column>
                     </Grid.Row>
