@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Menu, Button, Icon, Responsive, Sidebar, Image } from 'semantic-ui-react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
+import { isLoggedIn } from '../../config';
 import logo from '../../Assets/logo_red.png';
 import '../style.css';
 
@@ -22,6 +23,8 @@ class TopNav extends Component {
 
     handleLogOut = () => {
         //handle logout
+        localStorage.clear('user');
+        this.props.history.push('/login');
     }
 
     handleSignup = () => {
@@ -74,30 +77,51 @@ class TopNav extends Component {
                                     <Icon name='video play' />
                                 </Button.Content>
                             </Button>
-                            <Button basic style={btn} animated='vertical' as={NavLink} to="/user">
-                                <Button.Content hidden>
-                                    Dashboard
-                                </Button.Content>
-                                <Button.Content visible>
-                                    <Icon name='user' />
-                                </Button.Content>
-                            </Button>
-                            <Button basic style={btn} animated='vertical' as={NavLink} to='/login' >
-                                <Button.Content hidden>
-                                    Log In
-                                </Button.Content>
-                                <Button.Content visible>
-                                    <Icon name='sign in' />
-                                </Button.Content>
-                            </Button>
-                            <Button basic style={btn} animated='vertical' as={NavLink} to='/signup' >
-                                <Button.Content hidden>
-                                    Sign Up
-                                </Button.Content>
-                                <Button.Content visible>
-                                    <Icon name='signup' />
-                                </Button.Content>
-                            </Button>
+                            {
+                                isLoggedIn('user') ?
+                                    (
+                                        <Fragment>
+                                            <Button basic style={btn} animated='vertical' as={NavLink} to="/auth/user">
+                                                <Button.Content hidden>
+                                                    Dashboard
+                                                </Button.Content>
+                                                <Button.Content visible>
+                                                    <Icon name='user' />
+                                                </Button.Content>
+                                            </Button>
+                                            <Button basic style={btn} animated='vertical' onClick={this.handleLogOut}>
+                                                <Button.Content hidden>
+                                                    Logout
+                                                </Button.Content>
+                                                <Button.Content visible>
+                                                    <Icon name='sign-out' />
+                                                </Button.Content>
+                                            </Button>
+                                        </Fragment>
+                                    )
+                                    :
+                                    (
+                                        <Fragment>
+                                            <Button basic style={btn} animated='vertical' as={NavLink} to='/login' >
+                                                <Button.Content hidden>
+                                                    Log In
+                                                </Button.Content>
+                                                <Button.Content visible>
+                                                    <Icon name='sign in' />
+                                                </Button.Content>
+                                            </Button>
+                                            
+                                            <Button basic style={btn} animated='vertical' as={NavLink} to='/signup' >
+                                                <Button.Content hidden>
+                                                    Sign Up
+                                                </Button.Content>
+                                                <Button.Content visible>
+                                                    <Icon name='signup' />
+                                                </Button.Content>
+                                            </Button>
+                                        </Fragment>
+                                    )
+                            }
                         </Menu.Item>
                     </Menu>
                 </Responsive>
@@ -106,9 +130,22 @@ class TopNav extends Component {
                         <Sidebar as={Menu} animation='slide along' inverted vertical visible={sidebarOpened} style={{background: 'rgb(88, 29, 46)'}}>
                             <Menu.Item as={Link} to="/" onClick={this.handleToggle} >Home</Menu.Item>
                             <Menu.Item as={Link} to="/courses" onClick={this.handleToggle}>Courses</Menu.Item>
-                            <Menu.Item as={Link} to="/auth/user" onClick={this.handleToggle} >Dashboard</Menu.Item>  
-                            <Menu.Item as={Link} to="/login" onClick={this.handleToggle} >Sign In</Menu.Item>
-                            <Menu.Item as={Link} to="/signup" onClick={this.handleToggle} >Sign Up</Menu.Item>
+                            {
+                                isLoggedIn('user') ?
+                                    (
+                                        <Fragment>
+                                            <Menu.Item as={Link} to="/auth/user" onClick={this.handleToggle} >Dashboard</Menu.Item>  
+                                            <Menu.Item onClick={() => {this.handleToggle(); this.handleLogOut()}} >Logout</Menu.Item>  
+                                        </Fragment>
+                                    )
+                                    :
+                                    (
+                                        <Fragment>
+                                            <Menu.Item as={Link} to="/login" onClick={this.handleToggle} >Sign In</Menu.Item>
+                                            <Menu.Item as={Link} to="/signup" onClick={this.handleToggle} >Sign Up</Menu.Item>
+                                        </Fragment>
+                                    )
+                            }
                         </Sidebar>
 
                         <Menu.Item className="container" as={NavLink} to="/" style={{background: 'none', position: 'initial'}}>
