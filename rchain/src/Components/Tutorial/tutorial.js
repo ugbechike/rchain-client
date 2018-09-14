@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TopNav from '../Menu/nav';
 import LearnArea from './learnArea';
 import PracticeArea from './practiceArea';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Responsive } from 'semantic-ui-react';
 
 class Tutorial extends Component {
 	componentDidMount(){
@@ -13,6 +13,7 @@ class Tutorial extends Component {
 		return (
 			<div>
 				<TopNav />
+				<Responsive minWidth={Responsive.onlyTablet.minWidth}>
 					<Grid>
 					    <Grid.Row>
 					      <Grid.Column width={7}>
@@ -23,6 +24,10 @@ class Tutorial extends Component {
 					      </Grid.Column>
 					    </Grid.Row>
 					</Grid>
+				</Responsive>
+				<Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
+					<LearnArea />
+				</Responsive>
 			</div>
 		);
 	}
