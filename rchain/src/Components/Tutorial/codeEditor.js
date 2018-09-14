@@ -4,17 +4,39 @@ import '../style.css';
 
 class CodeEditor extends Component{
     state={
-        loading: false
+        loading: false,
+        codeValue: '',
+        output: ''
+    }
+
+    componentDidMount(){
+        this.ifr.onload = () => {
+        this.ifr.contentWindow.postMessage('hello', "*");
+        }
     }
 
     handleRun =()=>{
+        let { codeValue, output } = this.state;
         this.setState({
             loading: true
+        })
+
+        let evalVal = eval(codeValue)
+        this.setState({
+            output: evalVal,
+            loading: false
+        }, () => console.log(evalVal))
+
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            codeValue: e.target.value
         })
     }
 
     render(){
-        let  { loading } = this.state;
+        let  { loading, codeValue, output } = this.state;
 
         return (
             <div>
@@ -22,9 +44,11 @@ class CodeEditor extends Component{
                 <Grid divided='vertically'>
                     <Grid.Row>
                         <Grid.Column width={8} style={{padding: '0'}}>
-                                <TextArea placeholder=''
+                                <TextArea placeholder='Enter Code'
                                             spellCheck='false'
                                             wrap='logical'
+                                            onChange={this.handleChange}
+                                            value={codeValue}
                                     style={{ 
                                         minHeight: '640px', 
                                         width: '31%', 
@@ -43,11 +67,16 @@ class CodeEditor extends Component{
                         </Grid.Column>
                         <Grid.Column width={8} style={{padding: '0'}}>
                             <div>
+                                {/* {output} */}
                                 <iframe name='iframeResult'
+                                placeholder='Result'
+                                sandbox='allow-scripts'
+                                ref={(f) => this.ifr = f }
                                     style={{
+                                        color:'white',
                                         width: '100%',
                                         minHeight: '640px',
-                                        backgroundColor: 'gray',
+                                        backgroundColor: '#1a1a1a',
                                         position: 'fixed',
                                         top: '70px'
                                     }}
