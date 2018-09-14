@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Segment } from 'semantic-ui-react';
 import { Button, Form, Input, Icon, Responsive, Message } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
-import { API_URL } from '../../config';
+import { API_URL, isLoggedIn } from '../../config';
 import axios from 'axios';
 import TopNav from '../Menu/nav';
 import Footer from '../Menu/footer';
@@ -54,30 +54,28 @@ class SignUp extends Component {
                     if(password === confirmPassword){
                         /**HANDLE REQUEST TO SIGN UP */
 
-                        let user = { name: name.trim(), email: email.trim(), username: username.trim(), password, confirmPassword };
+                        let user = { name: name.trim(), email: email.trim(), username: username.trim(), password };
                         
-                        axios.post(`${API_URL}/users/register`, user)
+                        axios.post(`${API_URL}/users/add`, user)
                             .then(res => {
-                                    console.log(res)
                                 if(res){
                                     if(res.data){
-                                        if(res.data.code == 1) {
+                                        if(res.data.message == "User created successfully") {
+                                            /** HANDLE ALL ROUTING WHEN USER REGISERS SUCCESSFULLY
+                                            **/
+                                            let user = [res.data.user, res.data.isAdmin];
+                                            localStorage.setItem('user', JSON.stringify(user));
+
+                                            this.props.history.push("/login");
+                                        }else {
+                                            /** HANDLE SOME ERRORS HERE
+                                            **/
                                             errors.message = "Email or Username already in use";
                                             this.setState({
                                                 visible: false
                                             })
-                                        }else {
-                                            
-                                            /** HANDLE ALL ROUTING WHEN USER REGISERS SUCCESSFULLY
-                                            **/
 
-                                            let user = [res.data.user, res.data.isAdmin];
-                                            localStorage.setItem('user', JSON.stringify(user));
-
-                                            this.props.history.push("/auth/user");
                                         }
-                                    }else {
-                                        alert('Error in network connection, try again')
                                     }
                                 }else {
                                     alert('Error in network connection, try again');
@@ -157,9 +155,9 @@ class SignUp extends Component {
     render() {
         let { name, email, username, password, confirmPassword, loading, errors, visible } = this.state;
 
-        // if(isLoggedIn('user')){
-        //   this.props.history.push('/auth/user');
-        // }
+        if(isLoggedIn('user')){
+          this.props.history.push('/');
+        }
 
         const container = {
             width: '500px',
@@ -229,7 +227,7 @@ class SignUp extends Component {
                             <Form.Field
                                 id='name'
                                 control={Input}
-                                placeholder='FullName'
+                                placeholder='Full Name'
                                 onChange={this.handleChange}
                                 required
                                 value={name}
@@ -318,7 +316,7 @@ class SignUp extends Component {
                             <Form.Field
                                 id='name'
                                 control={Input}
-                                placeholder='name'
+                                placeholder='Full Name'
                                 onChange={this.handleChange}
                                 required
                                 value={name}

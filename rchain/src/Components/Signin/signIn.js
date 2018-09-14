@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import { Button, Form, Icon, Responsive, Input, Message } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
+import { API_URL, isLoggedIn } from '../../config';
 import axios from 'axios';
 import Footer from '../Menu/footer';
 import TopNav from '../Menu/nav';
@@ -18,7 +19,8 @@ class SignIn extends Component {
         activeItem: 'Log In',
         loading: false,
         visible: true,
-        loggedIn: false
+        loggedIn: false,
+        error: {}
       }
     }
 
@@ -36,7 +38,7 @@ class SignIn extends Component {
       handleSubmit = (e) => {
         e.preventDefault();
 
-        const { email, password, user } = this.state;
+        const { email, password, user, error } = this.state;
 
         this.setState({
           loading: true
@@ -46,19 +48,37 @@ class SignIn extends Component {
         /**MAKE A REQUEST TO THE SERVER */
     
         if(email.trim() == '' || password == ''){
-          console.log('email or password is required');
+          this.setState({
+            loading: false,
+            visible: false
+          })
+
+          error.message = 'password is required'
+
         }else {
 
             /**REVIEW THIS TO HANDLE EVERY LOGIN REQUEST */
 
-            axios.post(`https://ogenetv.herokuapp.com/users/login`, {email: email.trim(),password})
+            axios.post(`${API_URL}/login`, {email: email.trim(),password})
               .then(res => {
-                      console.log(res)
+
+                if(res.data.message == "Login successful"){
+                  console.log(res)
+                  localStorage.setItem('user', res.data.userId)
+
                   this.setState({
                     email: '',
                     password: '',
                     loading: false
                   })
+                }else {
+                  error.message = "Incorrect username or password"
+                  this.setState({
+                    loading: false,
+                    visible: false
+                  })
+                }
+
               })
 
         }
@@ -72,9 +92,9 @@ class SignIn extends Component {
     render() {
         const { activeItem, email, password, loading, error, visible } = this.state;
 
-        // if(isLoggedIn('user')){
-        //   this.props.history.push('/auth/user');
-        // }
+        if(isLoggedIn('user')){
+          this.props.history.push('/');
+        }
 
         const container = {
             width: '500px',
@@ -119,7 +139,7 @@ class SignIn extends Component {
                   error && (
                     <Message hidden={visible} negative onDismiss={this.handleDismiss}>
                       <Message.Header>Sorry, you can't log in with this account</Message.Header>
-                      <p>{error}</p>
+                      <p>{error.message}</p>
                     </Message>
                   )
                 }
@@ -147,8 +167,9 @@ class SignIn extends Component {
                             placeholder='Email' 
                             type="email" 
                             onChange={this.handleChange} 
-                            value={email} 
+                            value={email}
                             required 
+                             
                             />
                         </Form.Field>
 
@@ -159,7 +180,7 @@ class SignIn extends Component {
                             type="password" 
                             onChange={this.handleChange} 
                             value={password} 
-                            required 
+                             
                             />
                         </Form.Field>
                         <Button basic color='red' style={btn} animated='vertical'  >
@@ -179,7 +200,7 @@ class SignIn extends Component {
                   error && (
                     <Message hidden={visible} negative onDismiss={this.handleDismiss}>
                       <Message.Header>We're sorry you can't log in with this account</Message.Header>
-                      <p>{error}</p>
+                      <p>{error.message}</p>
                     </Message>
                   )
                 }
