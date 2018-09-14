@@ -35,7 +35,11 @@ class ListCoursesHome extends Component {
 
     handleClick = (id) => {
         //handle course taking here
+        if( localStorage.getItem('user')){
         this.props.history.push(`/course/${id}`);
+        }else{
+            this.props.history.push('/login')
+        }
     }
 
     render() {
