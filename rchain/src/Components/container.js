@@ -8,6 +8,8 @@ import SignUp from './Signup/signUp';
 import ForgotPassword from './ForgotPassword/forgotPassword';
 import ListCourses from './Course/listCourse';
 import Tutorial from '../Components/Tutorial/tutorial';
+import AdminLogin from '../Components/Admin/adminLogin';
+import UploadContent from '../Components/Admin/Upload/upload';
 
 
 class Container extends Component {
@@ -17,6 +19,8 @@ class Container extends Component {
 			<div>
 				<Responsive>
 					<Switch>
+						<Route path="/admin/upload" component={UploadContent} exact />
+						<Route path="/admin" component={AdminLogin} exact />
 			            <Route path="/course/:id" component={Tutorial} exact />
 			            <Route path="/courses" component={ListCourses} exact />
 			            <Route path="/signup" component={SignUp} exact />

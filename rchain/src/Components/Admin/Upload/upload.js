@@ -1,17 +1,13 @@
-/**
-**EVERY SERVER CALL WITH ENDPOINT CATEGORY REFERS TO COURSES IN THE DATABASE...
-**THE ENDPOINT SUPERCAT REFERS TO CATEGORIES IN THE DATABASE
-*/
 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Button, Input, TextArea, Select, Progress, Segment, TransitionablePortal, Header, Icon } from 'semantic-ui-react';
-import { REQ_GET } from '../../../api';
+import { API_URL } from '../../../config';
 import axios from 'axios';
-import MainNav from '../menu/mainNav';
-import SideNav from '../menu/sideNav';
+import MainNav from '../Menu/mainNav';
+import SideNav from '../Menu/sideNav';
 
-class UploadVideo extends Component {
+class UploadContent extends Component {
     constructor(props) {
         super(props);
 
@@ -19,8 +15,8 @@ class UploadVideo extends Component {
         	name: '',
         	description: '',
         	video: null,
-        	course: '',
-        	courses: [],
+            transcript: null,
+            tutorial: [],
         	progress: 0,
         	disabled: false,
         	transition: false
@@ -29,18 +25,6 @@ class UploadVideo extends Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        
-    	//GET ALL THE COURSES
-    	REQ_GET('category/get')
-    		.then(res => {
-                if(res.data){
-        			this.setState({
-        				courses: res.data
-        			})
-                }else {
-                    alert('Error in network connection, try again');
-                }
-    		})
     }
 
     handleChange = (e) => {
@@ -50,16 +34,16 @@ class UploadVideo extends Component {
     	
     }
 
-    handleOptionChange = (e) => {
-    	this.setState({
-    		course: e.target.value
-    	})
-    }
-
     handleVideoChange = (e) => {
     	this.setState({
     		video: e.target.files[0]
     	})
+    }
+
+    handlePdf = (e) => {
+        this.setState({
+            transcript: e.target.files[0]
+        })
     }
 
 
@@ -70,20 +54,20 @@ class UploadVideo extends Component {
     		disabled: true
     	})
 
-    	let { name, description, video, course } = this.state;
+    	let { name, description, video, transcript } = this.state;
 
-    	let Course = new FormData();
-    	Course.append('name', name);
-    	Course.append('description', description);
-    	Course.append('video', video);
-    	Course.append('course', course);
+    	let tutorial = new FormData();
+    	tutorial.append('name', name);
+    	tutorial.append('description', description);
+    	tutorial.append('video', video);
+    	tutorial.append('transcript', transcript);
 
     	try {
     		// statements
 	    	axios({
 			  	method: 'post',
-			  	url: 'https://virtualserver.herokuapp.com/video/add',
-			  	data: Course,
+			  	url: `${API_URL}/video/add`,
+			  	data: tutorial,
 			  	headers: {
 			  		'Content-Type': 'multipart/form-data'
 			  	},
@@ -95,7 +79,9 @@ class UploadVideo extends Component {
 			  	}
 			})
 			.then(res => {
-                if(res.data){
+                if(res){
+                    console.log(res);
+
     				this.setState({
     					disabled: false,
     					name: '',
@@ -105,8 +91,6 @@ class UploadVideo extends Component {
     					progress: 0,
     					transition: true
     				})
-                }else {
-                    alert('Error in network connection, try again');
                 }
 			})
 			.then(err => {
@@ -138,7 +122,7 @@ class UploadVideo extends Component {
     }
 
     render() {
-    	let { name, description, video, course, courses, progress, disabled, transition } = this.state;
+		let { name, description, course, courses, progress, disabled, transition } = this.state;
 
 
         return (
@@ -167,19 +151,12 @@ class UploadVideo extends Component {
     			      <TextArea id="description" placeholder='Tell us more about this video' value={description} onChange={this.handleChange} />
     			    </Form.Field>
     			    <Form.Field disabled={disabled}>
-    			      <label htmlFor="course">Course</label>
-    			      <select id="course" value={course} onChange={this.handleOptionChange}>
-                        <option>Choose...</option>
-
-    			      	{
-    			      		courses.map((course) => <option key={course._id} value={course._id}>{course.name}</option>)
-    			      	}
-
-    		          </select>
-    			    </Form.Field>
-    			    <Form.Field disabled={disabled}>
     			      <label htmlFor="video">Cover video</label>
     			      <Input accept=".mp4, .avi. .flv" id="video" placeholder='upload video only' type="file" onChange={this.handleVideoChange}/>
+    			    </Form.Field>
+                    <Form.Field disabled={disabled}>
+    			      <label htmlFor="pdf">Video Document</label>
+    			      <Input accept=".pdf" id="pdf" placeholder='upload pdf files only' type="file" onChange={this.handlePdf}/>
     			    </Form.Field>
     			    <Button type='submit' disabled={disabled} >Create</Button>
     			</Form>
@@ -190,4 +167,4 @@ class UploadVideo extends Component {
     }
 }
 
-export default withRouter(UploadVideo);
+export default withRouter(UploadContent);

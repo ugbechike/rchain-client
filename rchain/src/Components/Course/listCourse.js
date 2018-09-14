@@ -29,8 +29,10 @@ class ListCourses extends Component {
     }
 
     getCourses = () => {
-        axios.get(`${API_URL}/category/get`)
+        axios.get(`${API_URL}/video/get`)
             .then(res => {
+                console.log(res)
+
                 this.setState({
                     courses: res.data,
                     loading: false
@@ -58,7 +60,6 @@ class ListCourses extends Component {
                             return (
                                 <Card raised key={course._id} >
                                   <Card.Content>
-                                    <Image floated='right' size='mini' src={course.image} />
                                     <Card.Header>{course.name}</Card.Header>
                                     <Card.Meta></Card.Meta>
                                     <Card.Description>

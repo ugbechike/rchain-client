@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { Form, Button } from 'semantic-ui-react';
-import { REQ_POST } from '../../api';
+import axios from 'axios';
+import { API_URL } from '../../config'
 
 class AdminLogin extends Component {
 
@@ -9,7 +10,7 @@ class AdminLogin extends Component {
         super(props);
 
         this.state = {
-        	username: '',
+        	email: '',
         	password: '',
             loading: false
         }
@@ -31,62 +32,49 @@ class AdminLogin extends Component {
             loading: true
         })
 
-        let { username, password } = this.state;
+        let { email, password } = this.state;
 
-        if(username.trim() != '' && password != '' ){
+        if(email.trim() == '' && password == '' ){
+            alert("please input your username or password")
+        }else {
+            try {
+                axios.post(`${API_URL}/login/admin`, {email, password})
+                    .then(res => {
+                        if(res.data.message == "Admin login successful"){
+                            localStorage.setItem('admin', res.data.userId);
+                            this.props.history.push('/admin/upload');
+                        }else {
 
-        }
-
-        try {
-            // statements
-            REQ_POST('admin/login', { username: username.trim(), password })
-                .then(res => {
-                    if(res){
-                        if(res.data){
-                            console.log(res);
-                            let user = [res.data.message.passport.user, res.data.isAdmin]
-                            localStorage.setItem('user', JSON.stringify(user));
-
-                            this.props.history.push("/admin/dashboard")
-
-                            this.setState({
-                                loading: false
-                            })
-                        } else {
-                            // alert('Error in network connection, try again');
-                            alert('Unauthorised access...')
-                            this.setState({
-                                loading: false
-                            })
                         }
-                    }else {
-                        alert('Error in network connection, try again');
-                    }
-                })
-        } catch(e) {
-            // statements
-            console.log(e);
+
+                        this.setState({
+                            loading: false
+                        })
+                    })
+            } catch (err) {
+                console.log(err)
+            }
         }
 
     }
 
     render() {
         let { loading } = this.state;
-        const admin = JSON.parse(localStorage.getItem('user'));
+        const admin = localStorage.getItem('admin');
 
     	 const container = {
     	 	width: '500px',
     	 	margin: '200px auto'
     	 }
 
-         const Render = admin && admin[1] == 1 ?
+         const Render = admin ?
                             (<Redirect to="/admin/dashboard" />)
                             :
                             (
                                 <Form style={container} onSubmit={this.handleSubmit} loading={loading}>
                     			    <Form.Field>
-                    			      <label>Username</label>
-                    			      <input name="username" placeholder='Username' value={this.username} onChange={this.handleChange} required />
+                    			      <label>Email</label>
+                    			      <input name="email" placeholder='Email' value={this.email} onChange={this.handleChange} required />
                     			    </Form.Field>
                     			    <Form.Field>
                     			      <label>Password</label>

@@ -19,7 +19,7 @@ class Video extends Component {
 	}
 
 	getVideo = () => {
-		axios.get(`${API_URL}/video/get/5b8350dc18a1b100146e30a5`)
+		axios.get(`${API_URL}/video/get/${this.props.match.params.id}`)
 			.then(res => {
 				console.log(res);
 				this.setState({
@@ -68,7 +68,7 @@ class Video extends Component {
 							    </Container>
 
 							    <Container>
-							    	<Commenting videoId={`5b8350dc18a1b100146e30a5`} />
+							    	<Commenting videoId={`${this.props.match.params.id}`} />
 							    </Container>
 
 						    </Grid.Column>
@@ -109,7 +109,7 @@ class Video extends Component {
 					    <Grid.Row columns={1}>
 					      	<Grid.Column width={16}>
 						        <Container fluid textAlign="justified">
-							    	<Commenting videoId={`5b8350dc18a1b100146e30a5`} />
+							    	<Commenting videoId={`${this.props.match.params.id}`} />
 							    </Container>
 						    </Grid.Column>
 					    </Grid.Row>
