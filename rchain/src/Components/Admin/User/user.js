@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import MainNav from '../menu/mainNav';
-import SideNav from '../menu/sideNav';
+import MainNav from '../Menu/mainNav';
+import SideNav from '../Menu/sideNav';
 import { Card, Button, Image, Dimmer, Loader, Input } from 'semantic-ui-react';
-import { REQ_GET, REQ_POST } from '../../../api';
+import { API_URL } from '../../../config';
+import axios from 'axios'
 import Time from '../../time';
 
 class Users extends Component {
@@ -29,7 +30,7 @@ class Users extends Component {
     }
 
     getUsers = () => {
-        REQ_GET('users/users')
+        axios.get(`${API_URL}users/users`)
             .then(res => {
                 if(res){
                     if(res.data){
@@ -60,7 +61,7 @@ class Users extends Component {
                 searchLoad: false
             })
         }else {
-            REQ_GET(`users/search/${e.target.value}`)
+            axios.get(`${API_URL}users/search/${e.target.value}`)
                 .then(res => {
                     if(res.data){
                         this.setState({
@@ -78,7 +79,7 @@ class Users extends Component {
     handleDelete = (userID) => {
         let admin = JSON.parse(localStorage.getItem('user'));
 
-        REQ_POST(`users/delete/${userID}`, {user: admin[0]})
+        axios.post(`${API_URL}users/delete/${userID}`, {user: admin[0]})
             .then(res => {
                 if(res.data){
                     this.getUsers();

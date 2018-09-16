@@ -48,10 +48,10 @@ class Footer extends Component {
                     <Grid.Column width={5}>
                       <Header inverted as='h4' content='Popular Courses' />
                       <List link inverted>
-                        <List.Item as="a" >Learn React</List.Item>
-                        <List.Item as="a" >Photoshop</List.Item>
-                        <List.Item as="a" >Intro to Github</List.Item>
-                        <List.Item as="a" >Getting Started with Javascript</List.Item>
+                      <List.Item as="a" >Learn Rholang for dummies</List.Item>
+                        <List.Item as="a" >Rholang programming essentials</List.Item>
+                        <List.Item as="a" >Rholang smart contracts</List.Item>
+                        <List.Item as="a" >RNode setup on a cloud machine</List.Item>
                       </List>
                     </Grid.Column>
   

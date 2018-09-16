@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Card, Feed, Loader } from 'semantic-ui-react';
-import MainNav from '../menu/mainNav';
-import SideNav from '../menu/sideNav';
-import { REQ_GET } from '../../../api';
+import MainNav from '../Menu/mainNav';
+import SideNav from '../Menu/sideNav';
+import { API_URL } from '../../../config';
+import axios from 'axios'
 
 class AdminDashboard extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class AdminDashboard extends Component {
             commentLoading: true
         })
 
-        REQ_GET(`users/getlatest/4`)
+        axios.get(`${API_URL}users/getlatest/4`)
             .then(res => {
                 if(res.data){
                     this.setState({
@@ -45,7 +46,7 @@ class AdminDashboard extends Component {
                 }
             })
 
-        REQ_GET(`video/getlatest/4`)
+            axios.get(`${API_URL}video/getlatest/4`)
         .then(res => {
             if(res.data){
                 this.setState({
@@ -57,7 +58,7 @@ class AdminDashboard extends Component {
             }
         })
 
-        REQ_GET(`category/getlatest/4`)
+        axios.get(`${API_URL}category/getlatest/4`)
         .then(res => {
             if(res.data){
                 this.setState({
@@ -69,7 +70,7 @@ class AdminDashboard extends Component {
             }
         })
 
-        REQ_GET(`supercat/getlatest/4`)
+        axios.get(`${API_URL}supercat/getlatest/4`)
         .then(res => {
             if(res.data){
                 this.setState({
@@ -81,7 +82,7 @@ class AdminDashboard extends Component {
             }
         })
 
-        REQ_GET(`comment/getlatest/4`)
+        axios.get(`${API_URL}comment/getlatest/4`)
         .then(res => {
             if(res.data){
                 this.setState({

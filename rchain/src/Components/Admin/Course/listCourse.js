@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Table, Dimmer, Loader, Image, Icon, Grid, List, Form, Input, TextArea, Progress, TransitionablePortal, Segment, Header } from 'semantic-ui-react';
-import { REQ_GET, REQ_POST } from '../../../api';
+import { API_URL } from '../../../config'
 import axios from 'axios';
-import MainNav from '../menu/mainNav';
-import SideNav from '../menu/sideNav';
+import MainNav from '../Menu/mainNav';
+import SideNav from '../Menu/sideNav';
 
 class ListCourses extends Component {
     constructor(props) {
@@ -54,7 +54,7 @@ class ListCourses extends Component {
     getAllCourses = () => {
     	try {
     		// statements
-	    	REQ_GET('category/get')
+	    	axios.get(`${ API_URL }category/get`)
 	    		.then(res => {
 	    			if(res.data){
 		    			this.setState({
@@ -88,7 +88,7 @@ class ListCourses extends Component {
 
     	try {
     		// statements
-	    	REQ_GET(`category/get/${id}`)
+	    	axios.get(`category/get/${id}`)
 	        .then(res => {
 	        	if(res.data){
 		          this.setState({
@@ -117,7 +117,7 @@ class ListCourses extends Component {
     		showVideo: false
     	})
 
-    	REQ_GET(`category/get/${id}`)
+    	axios.get(`category/get/${id}`)
     		.then(res => {
     			if(res.data){
     				this.setState({
@@ -138,7 +138,7 @@ class ListCourses extends Component {
 
     	try {
     		// statements
-	    	REQ_POST(`category/delete/${id}`, {user: userid[0]})
+	    	axios.post(`category/delete/${id}`, {user: userid[0]})
 	        .then(res => {
 	        	if(res.data){
 		          this.getAllCourses();
@@ -162,7 +162,7 @@ class ListCourses extends Component {
 
     	try {
     		// statements
-	    	REQ_POST(`video/delete/${id}`, {user: userid[0]})
+	    	axios.post(`video/delete/${id}`, {user: userid[0]})
 	    		.then(res => {
 	    			if(res.data){
 		    			this.handleCourseVideo(id);

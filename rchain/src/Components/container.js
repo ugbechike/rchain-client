@@ -10,6 +10,9 @@ import ListCourses from './Course/listCourse';
 import Tutorial from '../Components/Tutorial/tutorial';
 import AdminLogin from '../Components/Admin/adminLogin';
 import UploadContent from '../Components/Admin/Upload/upload';
+import AdminDashboard from '../Components/Admin/Dash/adminDashboard';
+import Users from '../Components/Admin/User/user';
+import CreateCourse from '../Components/Admin/Course/createCourse';
 
 
 class Container extends Component {
@@ -19,7 +22,10 @@ class Container extends Component {
 			<div>
 				<Responsive>
 					<Switch>
-						<Route path="/admin/upload" component={UploadContent} exact />
+						<Route path="/admin/dashboard/courses" component={CreateCourse} exact />
+						<Route path="/admin/dashboard/user" component={Users} exact />
+						<Route path="/admin/dashboard" component={AdminDashboard} exact />
+						<Route path="/admin/dashboard/upload_video" component={UploadContent} exact />
 						<Route path="/admin" component={AdminLogin} exact />
 			            <Route path="/course/:id" component={Tutorial} exact />
 			            <Route path="/courses" component={ListCourses} exact />

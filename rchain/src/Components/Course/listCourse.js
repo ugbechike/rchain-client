@@ -42,7 +42,12 @@ class ListCourses extends Component {
 
     handleClick = (id) => {
         //handle course taking here
-        this.props.history.push(`/course/${id}`);
+        if( localStorage.getItem('user')){
+            this.props.history.push(`/course/${id}`);
+            }else{
+                this.props.history.push('/login')
+            }
+       
     }
 
     render() {
