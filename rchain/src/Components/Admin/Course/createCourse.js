@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Form, Button, Input, TextArea, Select, Progress, Segment, TransitionablePortal, Header, Icon } from 'semantic-ui-react';
-import { REQ_GET } from '../../../api';
+import { API_URL } from '../../../config'
 import axios from 'axios';
-import MainNav from '../menu/mainNav';
-import SideNav from '../menu/sideNav';
+import MainNav from '../Menu/mainNav';
+import SideNav from '../Menu/sideNav';
 
 class CreateCourse extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class CreateCourse extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         
-    	REQ_GET('supercat/get')
+    	axios.get(`${API_URL}supercat/get`)
     		.then(res => {
                 if(res.data){
         			this.setState({
