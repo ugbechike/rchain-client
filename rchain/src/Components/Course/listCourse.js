@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { List, Image, Loader, Card, Button } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+import { Loader, Card, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { API_URL } from '../../config';
 import TopNav from '../Menu/nav';
@@ -31,8 +31,6 @@ class ListCourses extends Component {
     getCourses = () => {
         axios.get(`${API_URL}/video/get`)
             .then(res => {
-                console.log(res)
-
                 this.setState({
                     courses: res.data,
                     loading: false
@@ -42,11 +40,7 @@ class ListCourses extends Component {
 
     handleClick = (id) => {
         //handle course taking here
-        if( localStorage.getItem('user')){
-            this.props.history.push(`/course/${id}`);
-            }else{
-                this.props.history.push('/login')
-            }
+        this.props.history.push(`/course/${id}`)
        
     }
 

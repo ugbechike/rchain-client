@@ -60,16 +60,13 @@ class Commenting extends Component {
     axios.post(`${API_URL}/comment/addcomment`, commenting)
       .then(res => {
         if(res) {
-          console.log(res);
-          console.log(commenting)
-
           if(res.data){
             this.setState({
               loading: false
             }, () => this.getVideo())
           }
         }
-	})
+  	})
   }
 
   render(){
@@ -103,7 +100,7 @@ class Commenting extends Component {
           }
 
           <Form reply onSubmit={this.handleSubmit}>
-            <Form.TextArea onChange={this.handleChange} value={newComment} />
+            <Form.TextArea onChange={this.handleChange} value={newComment} required />
             <Button loading={loading} content='Add Comment' labelPosition='left' icon='edit' primary />
           </Form>
         </Comment.Group>

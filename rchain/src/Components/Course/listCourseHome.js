@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { List, Image, Loader, Card, Button } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
+import { Image, Loader, Card, Button } from 'semantic-ui-react';
 import axios from 'axios';
 import { API_URL } from '../../config';
 
@@ -35,11 +35,7 @@ class ListCoursesHome extends Component {
 
     handleClick = (id) => {
         //handle course taking here
-        if( localStorage.getItem('user')){
-        this.props.history.push(`/course/${id}`);
-        }else{
-            this.props.history.push('/login')
-        }
+        this.props.history.push(`/course/${id}`)
     }
 
     render() {

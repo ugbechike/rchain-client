@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Responsive } from 'semantic-ui-react';
+import PrivateRoute from './privateRoute';
 import Home from './Home/home';
-import NotFound from './notFound';
+import NotFound from './NotFound/notFound';
 import SignIn from './Signin/signIn';
 import SignUp from './Signup/signUp';
 import ForgotPassword from './ForgotPassword/forgotPassword';
@@ -27,12 +28,14 @@ class Container extends Component {
 						<Route path="/admin/dashboard" component={AdminDashboard} exact />
 						<Route path="/admin/dashboard/upload_video" component={UploadContent} exact />
 						<Route path="/admin" component={AdminLogin} exact />
-			            <Route path="/course/:id" component={Tutorial} exact />
+
+						<PrivateRoute user={false} component={Tutorial} path="/course/:id" />
+			            
 			            <Route path="/courses" component={ListCourses} exact />
 			            <Route path="/signup" component={SignUp} exact />
 			            <Route path="/login" component={SignIn} exact/>
 			            <Route path="/reset" component={ForgotPassword} exact/>
-						<Route path="/" component={Home} />
+						<Route path="/" component={Home} exact />
 						<Route component={NotFound} />
 					</Switch>
 				</Responsive>
