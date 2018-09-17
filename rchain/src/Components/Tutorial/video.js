@@ -21,19 +21,12 @@ class Video extends Component {
 	getVideo = () => {
 		axios.get(`${API_URL}/video/get/${this.props.match.params.id}`)
 			.then(res => {
-				console.log(res);
 				this.setState({
 					video: res.data
 				})
 			})
 
 	}
-
-	/*componentDidUpdate(prevProps) {
-		if(prevProps.match.url !== this.props.match.url){
-			window.location.reload();
-		}
-	}*/
 
     render () {
     	let { video } = this.state;

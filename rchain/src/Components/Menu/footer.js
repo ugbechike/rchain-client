@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Container,
   Grid,
@@ -8,8 +7,7 @@ import {
   Segment,
   Responsive, 
   Label,
-  Input,
-  Message
+  Input
 } from 'semantic-ui-react';
 
 class Footer extends Component {

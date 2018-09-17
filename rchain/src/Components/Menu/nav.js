@@ -152,9 +152,9 @@ class TopNav extends Component {
                             <Image src={logo} size="tiny" style={{width: '100px'}}/>
                         </Menu.Item>
             
-                        <Menu.Item className="container" style={{position: 'fixed', top: '2px', right: '0', width: '70%', paddingRight: '0', position: 'initial'}}>
+                        <Menu.Item className="container" style={{position: 'fixed', top: '2px', right: '0', width: '70%', paddingRight: '0'}}>
         
-                            <Menu.Item onClick={this.handleToggle} style={{marginLeft: '0', position: 'absolute', right: '0'}}>
+                            <Menu.Item onClick={this.handleToggle} style={{marginLeft: '0', position: 'absolute', right: '0', top: '13px'}}>
                                 <Icon name='sidebar' style={{margin: '0'}} />
                             </Menu.Item>
                         </Menu.Item>
