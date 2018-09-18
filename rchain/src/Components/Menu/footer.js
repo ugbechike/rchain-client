@@ -10,6 +10,8 @@ import {
   Input
 } from 'semantic-ui-react';
 
+import RchainBot from '../Chatbot/rchainBot';
+
 class Footer extends Component {
   state = {
     email: ''
@@ -86,6 +88,7 @@ class Footer extends Component {
                 </Grid>
               </Container>
             </Segment>
+            <RchainBot />
       </Responsive>
     )
   }

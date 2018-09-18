@@ -15,6 +15,8 @@ import AdminDashboard from '../Components/Admin/Dash/adminDashboard';
 import Users from '../Components/Admin/User/user';
 import CreateCourse from '../Components/Admin/Course/createCourse';
 
+import RchainBot from './Chatbot/rchainBot';
+
 
 class Container extends Component {
 
@@ -38,7 +40,9 @@ class Container extends Component {
 						<Route path="/" component={Home} exact />
 						<Route component={NotFound} />
 					</Switch>
+				
 				</Responsive>
+
 			</div>
 		);
 	}
