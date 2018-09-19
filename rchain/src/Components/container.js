@@ -32,11 +32,11 @@ class Container extends Component {
 						<Route path="/admin" component={AdminLogin} exact />
 
 						<PrivateRoute user={false} component={Tutorial} path="/course/:id" />
-			            
-			            <Route path="/courses" component={ListCourses} exact />
-			            <Route path="/signup" component={SignUp} exact />
-			            <Route path="/login" component={SignIn} exact/>
-			            <Route path="/reset" component={ForgotPassword} exact/>
+
+            <Route path="/courses" component={ListCourses} exact />
+            <Route path="/signup" component={SignUp} exact />
+            <Route path="/login" component={SignIn} exact/>
+			      <Route path="/reset" component={ForgotPassword} exact/>
 						<Route path="/" component={Home} exact />
 						<Route component={NotFound} />
 					</Switch>
