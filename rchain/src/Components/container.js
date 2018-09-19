@@ -14,6 +14,7 @@ import UploadContent from '../Components/Admin/Upload/upload';
 import AdminDashboard from '../Components/Admin/Dash/adminDashboard';
 import Users from '../Components/Admin/User/user';
 import CreateCourse from '../Components/Admin/Course/createCourse';
+import Upload from './Admin/Upload/upload';
 
 
 class Container extends Component {
@@ -27,6 +28,7 @@ class Container extends Component {
 						<Route path="/admin/dashboard/user" component={Users} exact />
 						<Route path="/admin/dashboard" component={AdminDashboard} exact />
 						<Route path="/admin/dashboard/upload_video" component={UploadContent} exact />
+						<Route path="/admin/upload" component={Upload} exact />
 						<Route path="/admin" component={AdminLogin} exact />
 
 						<PrivateRoute user={false} component={Tutorial} path="/course/:id" />
