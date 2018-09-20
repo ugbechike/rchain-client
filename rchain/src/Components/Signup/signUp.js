@@ -54,8 +54,8 @@ class SignUp extends Component {
                     if(password === confirmPassword){
                         /**HANDLE REQUEST TO SIGN UP */
 
-                        let user = { name: name.trim(), email: email.trim(), username: username.trim(), password };
-                        
+                        let user = { name: name, email: email.trim(), username: username.trim(), password };
+                        console.log(user)
                         axios.post(`${API_URL}/users/add`, user)
                             .then(res => {
                                 if(res){

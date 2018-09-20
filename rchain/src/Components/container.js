@@ -13,8 +13,11 @@ import AdminLogin from '../Components/Admin/adminLogin';
 import UploadContent from '../Components/Admin/Upload/upload';
 import AdminDashboard from '../Components/Admin/Dash/adminDashboard';
 import Users from '../Components/Admin/User/user';
-import CreateCourse from '../Components/Admin/Course/createCourse';
+import AllCourses from './Admin/Course/listCourse';
 import Upload from './Admin/Upload/upload';
+import SendMail from './Admin/Sendmail/sendMail'
+
+import RchainBot from './Chatbot/rchainBot';
 
 
 class Container extends Component {
@@ -24,7 +27,8 @@ class Container extends Component {
 			<div>
 				<Responsive>
 					<Switch>
-						<Route path="/admin/dashboard/courses" component={CreateCourse} exact />
+						<Route path="/admin/dashboard/SendMail" component={SendMail}/>
+						<Route path="/admin/dashboard/courses" component={AllCourses} exact />
 						<Route path="/admin/dashboard/user" component={Users} exact />
 						<Route path="/admin/dashboard" component={AdminDashboard} exact />
 						<Route path="/admin/dashboard/upload_video" component={UploadContent} exact />
@@ -40,7 +44,9 @@ class Container extends Component {
 						<Route path="/" component={Home} exact />
 						<Route component={NotFound} />
 					</Switch>
+				
 				</Responsive>
+
 			</div>
 		);
 	}

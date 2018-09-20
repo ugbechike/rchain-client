@@ -21,9 +21,9 @@ const SideNav = (props) => {
 	        <Icon name='upload' />
 	        Upload
 	      </Menu.Item>
-	      <Menu.Item active as={NavLink} to="/admin/dashboard/categories">
+	      <Menu.Item active as={NavLink} to="/admin/dashboard/SendMail">
 	        <Icon name='clipboard' />
-	        Course Categories
+	        Send Mail
 	      </Menu.Item>
 	    </Sidebar>
     );

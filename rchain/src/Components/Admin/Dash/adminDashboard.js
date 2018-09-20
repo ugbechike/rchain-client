@@ -34,7 +34,7 @@ class AdminDashboard extends Component {
             commentLoading: true
         })
 
-        axios.get(`${API_URL}users/getlatest/4`)
+        axios.get(`${API_URL}/users/`)
             .then(res => {
                 if(res.data){
                     this.setState({
@@ -46,8 +46,9 @@ class AdminDashboard extends Component {
                 }
             })
 
-            axios.get(`${API_URL}video/getlatest/4`)
+            axios.get(`${API_URL}/video/sort/4`)
         .then(res => {
+            console.log(res)
             if(res.data){
                 this.setState({
                     latestVideos: res.data,
@@ -82,7 +83,7 @@ class AdminDashboard extends Component {
             }
         })
 
-        axios.get(`${API_URL}comment/getlatest/4`)
+        axios.get(`${API_URL}/comment/getlatest/4`)
         .then(res => {
             if(res.data){
                 this.setState({
