@@ -15,7 +15,8 @@ import AdminDashboard from '../Components/Admin/Dash/adminDashboard';
 import Users from '../Components/Admin/User/user';
 import AllCourses from './Admin/Course/listCourse';
 import Upload from './Admin/Upload/upload';
-import SendMail from './Admin/Sendmail/sendMail'
+import SendMail from './Admin/Sendmail/sendMail';
+import User from './User/user';
 
 import RchainBot from './Chatbot/rchainBot';
 
@@ -35,16 +36,17 @@ class Container extends Component {
 						<Route path="/admin/upload" component={Upload} exact />
 						<Route path="/admin" component={AdminLogin} exact />
 
+						<PrivateRoute user={false} component={User} path="/auth/user/dashboard" />
 						<PrivateRoute user={false} component={Tutorial} path="/course/:id" />
-			            
-			            <Route path="/courses" component={ListCourses} exact />
-			            <Route path="/signup" component={SignUp} exact />
-			            <Route path="/login" component={SignIn} exact/>
-			            <Route path="/reset" component={ForgotPassword} exact/>
+
+            <Route path="/courses" component={ListCourses} exact />
+            <Route path="/signup" component={SignUp} exact />
+            <Route path="/login" component={SignIn} exact/>
+			      <Route path="/reset" component={ForgotPassword} exact/>
 						<Route path="/" component={Home} exact />
 						<Route component={NotFound} />
 					</Switch>
-				
+
 				</Responsive>
 
 			</div>

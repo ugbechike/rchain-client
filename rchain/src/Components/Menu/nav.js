@@ -8,7 +8,7 @@ import '../style.css';
 class TopNav extends Component {
     constructor(props){
         super(props);
-        
+
         this.state = {
             sidebarOpened: false,
         }
@@ -45,7 +45,7 @@ class TopNav extends Component {
             border:'1px solid #b35959',
             color: '#b35959'
         };
-    
+
         const container = {
             height: '70px',
             width: '100%',
@@ -58,7 +58,7 @@ class TopNav extends Component {
             justifyContent: 'space-between',
             backgroundColor: 'rgb(255, 255, 255)'
         }
-        
+
         return (
             <div style={{zIndex: '10'}}>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -66,7 +66,7 @@ class TopNav extends Component {
                         <Menu.Item className="container" as={NavLink} to="/" style={{background: 'none', position: 'initial'}}>
                             <Image src={logo} size="tiny" style={{width: '150px'}}/>
                         </Menu.Item>
-            
+
                         <Menu.Item className="container" position='right' style={{position: 'initial'}}>
 
                             <Button basic style={btn} animated='vertical' as={NavLink} to="/courses" >
@@ -81,7 +81,7 @@ class TopNav extends Component {
                                 isLoggedIn('user') ?
                                     (
                                         <Fragment>
-                                            <Button basic style={btn} animated='vertical' as={NavLink} to="/auth/user">
+                                            <Button basic style={btn} animated='vertical' as={NavLink} to="/auth/user/dashboard">
                                                 <Button.Content hidden>
                                                     Dashboard
                                                 </Button.Content>
@@ -110,7 +110,7 @@ class TopNav extends Component {
                                                     <Icon name='sign in' />
                                                 </Button.Content>
                                             </Button>
-                                            
+
                                             <Button basic style={btn} animated='vertical' as={NavLink} to='/signup' >
                                                 <Button.Content hidden>
                                                     Sign Up
@@ -134,8 +134,8 @@ class TopNav extends Component {
                                 isLoggedIn('user') ?
                                     (
                                         <Fragment>
-                                            <Menu.Item as={Link} to="/auth/user" onClick={this.handleToggle} >Dashboard</Menu.Item>  
-                                            <Menu.Item onClick={() => {this.handleToggle(); this.handleLogOut()}} >Logout</Menu.Item>  
+                                            <Menu.Item as={Link} to="/auth/user/dashboard" onClick={this.handleToggle} >Dashboard</Menu.Item>
+                                            <Menu.Item onClick={() => {this.handleToggle(); this.handleLogOut()}} >Logout</Menu.Item>
                                         </Fragment>
                                     )
                                     :
@@ -151,9 +151,9 @@ class TopNav extends Component {
                         <Menu.Item className="container" as={NavLink} to="/" style={{background: 'none', position: 'initial'}}>
                             <Image src={logo} size="tiny" style={{width: '100px'}}/>
                         </Menu.Item>
-            
+
                         <Menu.Item className="container" style={{position: 'fixed', top: '2px', right: '0', width: '70%', paddingRight: '0'}}>
-        
+
                             <Menu.Item onClick={this.handleToggle} style={{marginLeft: '0', position: 'absolute', right: '0', top: '13px'}}>
                                 <Icon name='sidebar' style={{margin: '0'}} />
                             </Menu.Item>
