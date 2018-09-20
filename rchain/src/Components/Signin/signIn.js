@@ -27,7 +27,15 @@ class SignIn extends Component {
     componentDidMount(){
       window.scrollTo(0, 0);
     }
-    
+
+    handleGitLogin = () => {
+      fetch('https://rholang-cert.herokuapp.com/login/github')
+      .then(res => {
+        return res.json()
+      })
+      .then(val => console.log(val))
+    }
+
       handleChange = event => {
         this.setState({
           [event.target.id]: event.target.value
@@ -127,7 +135,8 @@ class SignIn extends Component {
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: '20px',
-            marginBottom: '20px'
+            marginBottom: '20px',
+            width: '100%'
         }
 
 
@@ -159,7 +168,19 @@ class SignIn extends Component {
                         to="/signup"
                     />
                 </Menu>
-                <Segment attached='bottom'>
+                <Segment attached='bottom' style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                    <Button 
+                    content='Signin with github' 
+                    icon='github' 
+                    labelPosition='left'
+                    style={{
+                      width: "70%",
+                      margin: "auto",
+                      marginTop: '10px'
+                      
+                    }}
+                    onClick={this.handleGitLogin}
+                     />
                     <Form loading={loading} style={formContainer} onSubmit={this.handleSubmit} >
                         <Form.Field style={{width: '90%'}} >
                             <Input 
@@ -220,7 +241,19 @@ class SignIn extends Component {
                         to="/signup"
                     />
                 </Menu>
-                <Segment attached='bottom'>
+                <Segment attached='bottom' style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                  <Button 
+                    content='Signin with githhub' 
+                    icon='github' 
+                    labelPosition='left'
+                    style={{
+                      width: "70%",
+                      margin: "auto",
+                      marginTop: '10px'
+                      
+                    }}
+                    onClick={this.handleGitLogin}
+                     />
                     <Form loading={loading} style={formContainer} onSubmit={this.handleSubmit} >
                         <Form.Field style={{width: '90%'}} >
                             <Input 

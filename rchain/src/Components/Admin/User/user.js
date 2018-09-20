@@ -30,16 +30,15 @@ class Users extends Component {
     }
 
     getUsers = () => {
-        axios.get(`${API_URL}users/users`)
+        axios.get(`${API_URL}/users/`)
             .then(res => {
                 if(res){
                     if(res.data){
                         this.setState({
-                            users: res.data.message,
+                            users: res.data.users,
                             loading: false
                         })
                     }else {
-                        alert('Error in network connection, try again');
                         this.setState({
                             loading: false
                         })
@@ -61,7 +60,7 @@ class Users extends Component {
                 searchLoad: false
             })
         }else {
-            axios.get(`${API_URL}users/search/${e.target.value}`)
+            axios.get(`${API_URL}/users/find?${e.target.value}`)
                 .then(res => {
                     if(res.data){
                         this.setState({
@@ -103,6 +102,7 @@ class Users extends Component {
                             <Loader inverted>Loading</Loader>
                         </Dimmer>
                         <Card.Group centered stackable style={{zIndex: '0', width: '80%', margin: 'auto', marginTop: '40px'}}>
+                        {console.log(users)}
                             {
                                 users &&
                                     users.map((user) => {
@@ -110,7 +110,7 @@ class Users extends Component {
                                             <Card raised key={user._id} style={{width: '30%'}}>
                                                 <Image src={user.profile_pics} />
                                                 <Card.Content>
-                                                  <Card.Header>{`${user.firstName} ${user.lastName}`}</Card.Header>
+                                                  <Card.Header>{user.name}</Card.Header>
                                                   <Card.Description><strong>Email:</strong> {user.email}</Card.Description>
                                                   <Card.Description><strong>Username:</strong> {user.username}</Card.Description>
                                                   <Card.Description><strong>Date Joined:</strong> <Time time={user.time} /></Card.Description>

@@ -6,7 +6,7 @@ import axios from 'axios';
 import MainNav from '../Menu/mainNav';
 import SideNav from '../Menu/sideNav';
 
-class ListCourses extends Component {
+class AllCourses extends Component {
     constructor(props) {
         super(props);
 
@@ -20,11 +20,12 @@ class ListCourses extends Component {
         	progress: 0,
         	name: '',
         	description: '',
-        	image: null,
+        	video: null,
         	courseId: '',
         	transition: false,
         	showForm: false,
-        	showVideo: false
+			showVideo: false,
+			searchLoad: false
         }
     }
 
@@ -45,16 +46,16 @@ class ListCourses extends Component {
     	
     }
 
-    handleImageChange = (e) => {
+    handleVideoChange = (e) => {
     	this.setState({
-    		image: e.target.files[0]
+    		video: e.target.files[0]
     	})
     }
 
     getAllCourses = () => {
     	try {
     		// statements
-	    	axios.get(`${ API_URL }category/get`)
+	    	axios.get(`${ API_URL }/video/get`)
 	    		.then(res => {
 	    			if(res.data){
 		    			this.setState({
@@ -78,36 +79,36 @@ class ListCourses extends Component {
 
     }
 
-    handleCourseVideo = (id) => {
-    	console.log('clicked');
-    	this.setState({
-    		loadVideo: true,
-    		showForm: false,
-    		showVideo: true
-    	})
+    // handleCourseVideo = (id) => {
+    // 	console.log('clicked');
+    // 	this.setState({
+    // 		loadVideo: true,
+    // 		showForm: false,
+    // 		showVideo: true
+    // 	})
 
-    	try {
-    		// statements
-	    	axios.get(`category/get/${id}`)
-	        .then(res => {
-	        	if(res.data){
-		          this.setState({
-		          	courseVideo: res.data.videos,
-		          	loadVideo: false
-		          })
-	        	}else {
-	        		alert('Error in network connection, try again');
-	        		this.setState({
-	        			loadVideo: false
-	        		})
-	        	}
-	        });
-    	} catch(e) {
-    		// statements
-    		console.log(e);
-    	}
+    // 	try {
+    // 		// statements
+	//     	axios.get(`video/get/${id}`)
+	//         .then(res => {
+	//         	if(res.data){
+	// 	          this.setState({
+	// 	          	courseVideo: res.data.videos,
+	// 	          	loadVideo: false
+	// 	          })
+	//         	}else {
+	//         		alert('Error in network connection, try again');
+	//         		this.setState({
+	//         			loadVideo: false
+	//         		})
+	//         	}
+	//         });
+    // 	} catch(e) {
+    // 		// statements
+    // 		console.log(e);
+    // 	}
 
-    }
+    // }
 
     handleCourseEdit = (id) => {
     	console.log(id)
@@ -117,7 +118,7 @@ class ListCourses extends Component {
     		showVideo: false
     	})
 
-    	axios.get(`category/get/${id}`)
+    	axios.get(`${ API_URL }/video/get/${id}`)
     		.then(res => {
     			if(res.data){
     				this.setState({
@@ -131,28 +132,29 @@ class ListCourses extends Component {
     }
 
     handleCourseDelete = (id) => {
-    	let userid = JSON.parse(localStorage.getItem('user'));
+    	let userid = localStorage.getItem('admin');
     	this.setState({
     		deleting: true
     	})
 
     	try {
     		// statements
-	    	axios.post(`category/delete/${id}`, {user: userid[0]})
+	    	axios.get(`${API_URL}/video/delete/${id}/${userid}`)
 	        .then(res => {
+				console.log(res)
 	        	if(res.data){
 		          this.getAllCourses();
 
-		          this.setState({
-		          	deleting: false
-		          })
-	        	}else {
-	        		alert('Error in network connection, try again');
-	        	}
+				}
+				this.setState({
+					deleting: false
+				})
+				
+				
 	        });
     	} catch(e) {
     		// statements
-    		console.log(e);
+			console.log(e);
     	}
 
     }
@@ -162,7 +164,7 @@ class ListCourses extends Component {
 
     	try {
     		// statements
-	    	axios.post(`video/delete/${id}`, {user: userid[0]})
+	    	axios.post(`${API_URL}/video/delete/${id}`, {user: userid[0]})
 	    		.then(res => {
 	    			if(res.data){
 		    			this.handleCourseVideo(id);
@@ -184,18 +186,18 @@ class ListCourses extends Component {
     		disabled: true
     	})
 
-    	let { name, description, image, courseId } = this.state;
+    	let { name, description, video, courseId } = this.state;
 
     	let editedCourse = new FormData();
     	editedCourse.append('name', name);
     	editedCourse.append('description', description);
-    	editedCourse.append('image', image);
+    	editedCourse.append('video', video);
 
     	try {
     		// statements
 	    	axios({
 			  	method: 'post',
-			  	url: `https://virtualserver.herokuapp.com/category/edit/${courseId}`,
+			  	url: `${API_URL}/video/edit/${courseId}`,
 			  	data: editedCourse,
 				headers: {
 					'Content-Type': 'multipart/form-data'
@@ -216,7 +218,7 @@ class ListCourses extends Component {
     					transition: true,
     					name: '',
     		        	description: '',
-    		        	image: null,
+    		        	video: null,
     				})
                 }else {
                     alert('Error in network connection, try again');
@@ -228,7 +230,7 @@ class ListCourses extends Component {
 					disabled: false,
 					name: '',
 		        	description: '',
-		        	image: null
+		        	video: null
 				})
 			})
     	} catch(e) {
@@ -237,7 +239,7 @@ class ListCourses extends Component {
     		this.setState({
     			name: '',
 	        	description: '',
-	        	image: null,
+	        	video: null,
 	        	progress: 0,
 	        	disabled: false,
 	        	transition: false
@@ -245,22 +247,48 @@ class ListCourses extends Component {
     	}
 
 
+	}
+	
+	handleSearch = (e) => {
+        this.setState({
+            searchLoad: true
+        })
+        if(e.target.value.trim() == ''){
+            this.getAllCourses();
+
+            this.setState({
+                searchLoad: false
+            })
+        }else {
+            axios.get(`${API_URL}/video/search/${e.target.value}`)
+                .then(res => {
+                    if(res.data){
+                        this.setState({
+                            courses: res.data,
+                            searchLoad: false
+                        })
+                    }else {
+                        alert('Error in network connection, try again');
+                    }
+                })
+        }
+
     }
+
+
 
     handleClose = () => {
     	setTimeout(() => this.setState({transition: false}), 5000)
     }
 
     render() {
-    	let { courses, loading, deleting, courseVideo, loadVideo, name, description, showForm, disabled, progress, transition, showVideo } = this.state;
+    	let { searchLoad, courses, loading, deleting, courseVideo, loadVideo, name, description, showForm, disabled, progress, transition, showVideo } = this.state;
 
         return (
         	<div>
 	        	<MainNav />
 	            <div style={{marginTop: '90px', marginLeft: '160px'}}>
-		            <Button inverted primary as={Link} to="/admin/dashboard/create_course">
-		              Create Course
-		            </Button>
+				<Input loading={searchLoad} fluid onChange={this.handleSearch} icon='video' iconPosition='left' placeholder='Search videos...' style={{width: '290px', margin: 'auto', marginBottom: '15px'}}/>
 
 		            <Dimmer active={loading} inverted>
 		                <Loader indeterminate>Getting Courses</Loader>
@@ -362,8 +390,8 @@ class ListCourses extends Component {
 					    			      <TextArea id="description" placeholder='Tell us more about this category' value={description} onChange={this.handleChange} />
 					    			    </Form.Field>
 					    			    <Form.Field disabled={disabled}>
-					    			      <label htmlFor="image">Cover Image</label>
-					    			      <Input accept=".jpg, .jpeg, .png" id="image" placeholder='upload image only' type="file" onChange={this.handleImageChange}/>
+					    			      <label htmlFor="video">Tutorial Video</label>
+					    			      <Input accept=".mp4, .mkv, .mp3, .avi" id="video" placeholder='upload image only' type="file" onChange={this.handleVideoChange}/>
 					    			    </Form.Field>
 					    			    <Button type='submit' disabled={disabled}>Edit Course</Button>
 					    			</Form>
@@ -378,4 +406,4 @@ class ListCourses extends Component {
     }
 }
 
-export default ListCourses;
+export default AllCourses;
