@@ -46,10 +46,7 @@ class SendMail extends Component {
 		} 
 		axios.post(`${API_URL}/subscribe/notify`, mail)
 		.then(res => {
-		  console.log(res)
 		  if(res){
-			console.log(res);
-
 			this.setState({
 				disabled: false,
 				subject: '',
