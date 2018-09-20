@@ -41,20 +41,24 @@ class ListCourses extends Component {
     handleClick = (id) => {
       let userId = localStorage.getItem('user');
       //handle course taking here
-      axios.post(`${API_URL}/users/library/add`, {user: userId, video: id})
-        .then(res => {
-          console.log(res);
-          if(res){
-            if(res.data.message == "Video added successfully to user library"){
-              this.props.history.push(`/course/${id}`)
-            }else if(res.data.message == "Video already exists in your library"){
-              this.props.history.push(`/course/${id}`)
+      if(userId){
+        axios.post(`${API_URL}/users/library/add`, {user: userId, video: id})
+          .then(res => {
+            console.log(res);
+            if(res){
+              if(res.data.message == "Video added successfully to user library"){
+                this.props.history.push(`/course/${id}`)
+              }else if(res.data.message == "Video already exists in your library"){
+                this.props.history.push(`/course/${id}`)
+              }
             }
-          }
-        })
-        .then(err => {
-          console.log(err)
-        })
+          })
+          .then(err => {
+            console.log(err)
+          })
+      }else {
+        this.props.history.push('/login')
+      }
 
     }
 
