@@ -29,10 +29,11 @@ class SignIn extends Component {
     }
 
     handleGitLogin = () => {
-      axios.get(`${API_URL}/login/github`)
+      fetch('https://rholang-cert.herokuapp.com/login/github')
       .then(res => {
-        console.log(res)
+        return res.json()
       })
+      .then(val => console.log(val))
     }
 
       handleChange = event => {
@@ -169,7 +170,7 @@ class SignIn extends Component {
                 </Menu>
                 <Segment attached='bottom' style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <Button 
-                    content='Signin with githhub' 
+                    content='Signin with github' 
                     icon='github' 
                     labelPosition='left'
                     style={{

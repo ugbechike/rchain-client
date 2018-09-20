@@ -9,6 +9,8 @@ import {
   Label,
   Input
 } from 'semantic-ui-react';
+import { API_URL, isLoggedIn } from '../../config';
+import axios from 'axios'
 
 import RchainBot from '../Chatbot/rchainBot';
 
@@ -24,6 +26,11 @@ class Footer extends Component {
   }
 
   handleSubscribe = () => {
+    const email= this.state.email
+    axios.post(`${API_URL}/subscribe/add`, email)
+    .then(res => {
+      console.log(res)
+    })
     console.log(this.state.email)
   }
 
@@ -33,7 +40,7 @@ class Footer extends Component {
       width: '100%',
       marginTop: '150px',
       backgroundColor: '#57022f',
-      height: '500px',
+      height: '400px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
