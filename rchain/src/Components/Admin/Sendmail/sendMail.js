@@ -14,9 +14,9 @@ class SendMail extends Component {
         this.state = {
         	subject: '',
         	message: '',
-        	progress: 0,
         	disabled: false,
-        	transition: false
+			transition: false,
+			loading: false
         }
     }
 
@@ -32,69 +32,33 @@ class SendMail extends Component {
     }
 
 
-    /** USING A DIFFERENT API CALL FOR UPLOADING VIDEO */
+    /** SENDING MAIL TO ALL USERS */
     handleSubmit = (e) => {
     	e.preventDefault();
     	this.setState({
-    		disabled: true
-    	})
-
-    	let { subject, message } = this.state;
-
-    	let mail = new FormData();
-    	mail.append('msgHead', subject);
-    	mail.append('msgBody', message);
-    	
-
-    	try {
-    		// statements
-	    	axios({
-			  	method: 'post',
-			  	url: `${API_URL}/subscribe/notify`,
-			  	data: mail,
-			  	headers: {
-			  		'Content-Type': 'multipart/form-data'
-			  	},
-				onUploadProgress: (progressEvent) => {
-			    	const { loaded, total } = progressEvent;
-			    	this.setState({
-			    		progress: Math.round((loaded/total) * 100)
-			    	})
-			  	}
-			})
-			.then(res => {
-                if(res){
-                    console.log(res);
-
-    				this.setState({
-    					disabled: false,
-    					subject: '',
-    					message: '',
-    					progress: 0,
-    					transition: true
-    				})
-                }
-			})
-			.then(err => {
-				console.log(err);
-				this.setState({
-					disabled: false,
-					progress: 0
-				})
-			})
-    	} catch(e) {
-    		// statements
-    		console.log(e);
-    		this.setState({
+			disabled: true,
+			loading: true
+		})
+		
+		const mail={
+			msgHead: this.state.subject,
+			msgBody: this.state.message
+		} 
+		axios.post(`${API_URL}/subscribe/notify`, mail)
+		.then(res => {
+		  if(res){
+			this.setState({
 				disabled: false,
 				subject: '',
 				message: '',
-				progress: 0,
-				transition: true
+				transition: true,
+				loading: false
+				
 			})
-    	}
+		}
+		})
 
-
+    
     }
 
     handleClose = () => {
@@ -102,7 +66,7 @@ class SendMail extends Component {
     }
 
     render() {
-		let { subject, message, progress, disabled, transition } = this.state;
+		let { subject, message, disabled, transition, loading } = this.state;
 
 
         return (
@@ -117,11 +81,8 @@ class SendMail extends Component {
     	          </Segment>
     	      	</TransitionablePortal>
 
-              	<Form onSubmit={this.handleSubmit} style={{width: '500px', margin: 'auto'}} encType="multipart/form-data">
-              		{
-              			disabled &&
-              				<Progress percent={progress} indicating progress size="small" />
-    				}
+              	<Form onSubmit={this.handleSubmit} style={{width: '500px', margin: 'auto'}} encType="multipart/form-data" loading={loading}>
+              		
     			    <Form.Field disabled={disabled}>
     			      <label htmlFor="name">Subject</label>
     			      <Input id="subject" placeholder='Subject' value={subject} onChange={this.handleChange} />
