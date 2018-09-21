@@ -39,7 +39,16 @@ class CodeEditor extends Component{
                 
                 <Grid divided='vertically'>
                     <Grid.Row>
-                        <Grid.Column width={8} style={{padding: '0'}}>
+
+                        <iframe src="https://rchain.cloud/" style={{
+                            width: '57.7%', 
+                            height: '630px',
+                            position: 'fixed',
+                            top: '70px'
+                            }}>
+ 
+                        </iframe>
+                        {/* <Grid.Column width={8} style={{padding: '0'}}>
                                 <TextArea placeholder='Enter Code'
                                             spellCheck='false'
                                             wrap='logical'
@@ -81,7 +90,7 @@ class CodeEditor extends Component{
                                 />
 
                             </div>
-                        </Grid.Column>
+                        </Grid.Column> */}
                     </Grid.Row>
 
                 
