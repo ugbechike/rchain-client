@@ -5,6 +5,11 @@ import Footer from '../Menu/footer';
 import TopNav from '../Menu/nav';
 import headerImage from '../../Assets/rc.png';
 import ListCoursesHome from '../Course/listCourseHome';
+import { Carousel } from "react-responsive-carousel";
+import slide1 from '../../Assets/slide1.png';
+import slide2 from '../../Assets/slide2.png';
+import './home.css';
+
 
 export class Home extends PureComponent {
 
@@ -15,11 +20,11 @@ export class Home extends PureComponent {
   render() {
 
     const header = {
-      backgroundImage: `url(${headerImage})`,
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      height: '580px',
+      // backgroundImage: `url(${headerImage})`,
+      // backgroundPosition: 'center',
+      // backgroundSize: 'cover',
+      // backgroundRepeat: 'no-repeat',
+      height: '100%',
       width: '100%',
       display: 'flex', 
       alignItems: 'center'
@@ -31,10 +36,30 @@ export class Home extends PureComponent {
 
         <div style={{marginTop: '70px'}}>
           <Responsive style={header} minWidth={Responsive.onlyTablet.minWidth}>
-
+            <Carousel autoPlay>
+              <div>
+                <img src={slide2} alt='pix'/>
+                <p className="legend">Legend 1</p>
+              </div>
+              <div>
+                <img src={slide2} alt='pix' />
+                <p className="legend">Legend 2</p>
+              </div>
+             
+            </Carousel>
           </Responsive>
-          <Responsive style={{...header, height: '410px'}} maxWidth={Responsive.onlyMobile.maxWidth}>
-
+          <Responsive style={{...header, height: '100%'}} maxWidth={Responsive.onlyMobile.maxWidth}>
+          <Carousel autoPlay>
+              <div>
+                <img src={slide2} alt='pix' />
+                <p className="legend">Legend 1</p>
+              </div>
+              <div>
+                <img src={slide2} alt='pix'/>
+                <p className="legend">Legend 2</p>
+              </div>
+             
+            </Carousel>
           </Responsive>
 
           <ListCoursesHome />

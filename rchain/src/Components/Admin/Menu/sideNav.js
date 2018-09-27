@@ -25,6 +25,10 @@ const SideNav = (props) => {
 	        <Icon name='clipboard' />
 	        Send Mail
 	      </Menu.Item>
+				<Menu.Item active as={NavLink} to="/admin/dashboard/ListCategories">
+	        <Icon name='clipboard' />
+	       Create Category
+	      </Menu.Item>
 	    </Sidebar>
     );
 }

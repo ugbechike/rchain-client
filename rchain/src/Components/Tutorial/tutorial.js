@@ -22,7 +22,8 @@ class Tutorial extends Component {
 					      <Grid.Column width={9} style={{padding: '0'}}>
 					        	<PracticeArea />
 					      </Grid.Column>
-					    </Grid.Row>
+						</Grid.Row> 
+						
 					</Grid>
 				</Responsive>
 				<Responsive maxWidth={Responsive.onlyMobile.maxWidth}>

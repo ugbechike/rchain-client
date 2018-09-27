@@ -16,7 +16,10 @@ class UploadContent extends Component {
         	description: '',
         	video: null,
             transcript: null,
-            tutorial: [],
+			tutorial: [],
+			category: '',
+			categories:[],
+			categoryid: '',
         	progress: 0,
         	disabled: false,
         	transition: false
@@ -24,7 +27,15 @@ class UploadContent extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0);
+		window.scrollTo(0, 0);
+		axios.get(`${API_URL}/category/get`)
+		.then(res => {
+			if(res.data){
+				this.setState({
+					categories: res.data
+				})
+			}
+		})
     }
 
     handleChange = (e) => {
@@ -32,6 +43,13 @@ class UploadContent extends Component {
     		[e.target.id]: e.target.value
     	})
     	
+	}
+	
+	handleOptionChange = (e) => {
+    	this.setState({
+			categoryid: e.target.value,
+		})
+		
     }
 
     handleVideoChange = (e) => {
@@ -54,13 +72,14 @@ class UploadContent extends Component {
     		disabled: true
     	})
 
-    	let { name, description, video, transcript } = this.state;
+    	let { name, description, video, transcript, categoryid } = this.state;
 
     	let tutorial = new FormData();
     	tutorial.append('name', name);
     	tutorial.append('description', description);
     	tutorial.append('video', video);
-    	tutorial.append('transcript', transcript);
+		tutorial.append('transcript', transcript);
+		tutorial.append('category', categoryid)
 
     	try {
     		// statements
@@ -87,7 +106,7 @@ class UploadContent extends Component {
     					name: '',
     					description: '',
     					video: null,
-    					course: '',
+    					category: '',
     					progress: 0,
     					transition: true
     				})
@@ -122,7 +141,7 @@ class UploadContent extends Component {
     }
 
     render() {
-		let { name, description, course, courses, progress, disabled, transition } = this.state;
+		let { name, description, course, categories, progress, disabled, transition } = this.state;
 
 
         return (
@@ -150,6 +169,20 @@ class UploadContent extends Component {
     			      <label htmlFor="description">Video Description</label>
     			      <TextArea id="description" placeholder='Tell us more about this video' value={description} onChange={this.handleChange} />
     			    </Form.Field>
+
+					<Form.Field disabled={disabled}>
+    			      <label htmlFor="course">Category</label>
+    			      <select id="course" value={this.state.categoryid} onChange={this.handleOptionChange}>
+                        <option>Choose...</option>
+
+    			      	{
+    			      		categories.map((category) => <option key={category._id} value={category._id}>{category.name}</option>)
+    			      	}
+
+    		          </select>
+    			    </Form.Field>
+
+
     			    <Form.Field disabled={disabled}>
     			      <label htmlFor="video">Cover video</label>
     			      <Input accept=".mp4, .avi. .flv" id="video" placeholder='upload video only' type="file" onChange={this.handleVideoChange}/>

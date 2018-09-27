@@ -63,7 +63,7 @@ class ListCoursesHome extends Component {
         return (
             <div>
                 <Loader style={{zIndex: '1', width: '90%', margin: 'auto', marginTop: '90px', marginBottom: '0px'}} active={loading} inline='centered' />
-                <Card.Group centered stackable  style={{zIndex: '0', width: '90%', margin: 'auto', marginTop: '70px'}}>
+                <Card.Group centered stackable  style={{zIndex: '0', width: '90%', margin: 'auto', marginTop: '20px'}}>
 
                     {
                         courses &&

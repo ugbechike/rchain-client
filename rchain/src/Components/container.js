@@ -17,6 +17,7 @@ import AllCourses from './Admin/Course/listCourse';
 import Upload from './Admin/Upload/upload';
 import SendMail from './Admin/Sendmail/sendMail';
 import User from './User/user';
+import ListCategories from '../Components/Admin/Category/listCategories';
 
 import RchainBot from './Chatbot/rchainBot';
 
@@ -28,6 +29,7 @@ class Container extends Component {
 			<div>
 				<Responsive>
 					<Switch>
+						<Route path="/admin/dashboard/ListCategories" component={ListCategories}/>
 						<Route path="/admin/dashboard/SendMail" component={SendMail}/>
 						<Route path="/admin/dashboard/courses" component={AllCourses} exact />
 						<Route path="/admin/dashboard/user" component={Users} exact />
