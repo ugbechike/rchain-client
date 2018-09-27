@@ -21,6 +21,7 @@ class Video extends Component {
 	getVideo = () => {
 		axios.get(`${API_URL}/video/get/${this.props.match.params.id}`)
 			.then(res => {
+				console.log(res);
 				this.setState({
 					video: res.data
 				})
@@ -50,12 +51,12 @@ class Video extends Component {
 						    <Grid.Column width={16}>
 						        <Container  fluid textAlign="justified" style={{width: '95%'}}>
 								    <Header>
-								        <Header.Content>
-									      	{video.name}
-									      	<Divider />
-									      	<Header.Subheader>
-										        {video.description}
-											</Header.Subheader>
+							        <Header.Content>
+								      	{video.name}
+								      	<Divider />
+								      	<Header.Subheader>
+									        {video.description} - <a href={video.transcript} target="_blank">Download Transcript</a>
+												</Header.Subheader>
 									    </Header.Content>
 								    </Header>
 							    </Container>
@@ -83,25 +84,25 @@ class Video extends Component {
 				    </div>
 
 					<Grid  style={{margin: '0px', width: '100%'}}>
-					    <Grid.Row columns={1}>
-					      	<Grid.Column width={16}>
-						        <Container  fluid textAlign="justified" style={{width: '90%'}}>
+					    <Grid.Row>
+				      	<Grid.Column width={16}>
+					        <Container  fluid textAlign="justified" style={{width: '90%'}}>
 								    <Header>
 								        <Header.Content>
 									      	{video.name}
 									      	<Divider />
 									      	<Header.Subheader>
-										        {video.description}
-											</Header.Subheader>
-									    </Header.Content>
+										        {video.description} - <a href={video.transcript} target="_blank">Download Transcript</a>
+													</Header.Subheader>
+										    </Header.Content>
 								    </Header>
 							    </Container>
 						    </Grid.Column>
 					    </Grid.Row>
 
 					    <Grid.Row columns={1}>
-					      	<Grid.Column width={16}>
-						        <Container fluid textAlign="justified">
+				      	<Grid.Column width={16}>
+					        <Container fluid textAlign="justified">
 							    	<Commenting videoId={`${this.props.match.params.id}`} />
 							    </Container>
 						    </Grid.Column>
