@@ -21,7 +21,6 @@ class Video extends Component {
 	getVideo = () => {
 		axios.get(`${API_URL}/video/get/${this.props.match.params.id}`)
 			.then(res => {
-				console.log(res);
 				this.setState({
 					video: res.data
 				})
