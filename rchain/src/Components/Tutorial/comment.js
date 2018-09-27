@@ -80,7 +80,7 @@ class Commenting extends Component {
           {
             comments &&
               comments.map((comment) => {
-                return(    
+                return(
                   <Comment key={comment.time} >
                     <Comment.Avatar as='a' src={comment.user_id.profile_pics} />
                     <Comment.Content>
@@ -99,10 +99,16 @@ class Commenting extends Component {
               })
           }
 
-          <Form reply onSubmit={this.handleSubmit}>
-            <Form.TextArea onChange={this.handleChange} value={newComment} required />
-            <Button loading={loading} content='Add Comment' labelPosition='left' icon='edit' primary />
-          </Form>
+          {
+            localStorage.getItem('user') ?
+              <Form reply onSubmit={this.handleSubmit}>
+                <Form.TextArea onChange={this.handleChange} value={newComment} required />
+                <Button loading={loading} content='Add Comment' labelPosition='left' icon='edit' primary />
+              </Form>
+              :
+              null    
+          }
+
         </Comment.Group>
     )
   }

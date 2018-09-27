@@ -37,7 +37,7 @@ class Container extends Component {
 						<Route path="/admin" component={AdminLogin} exact />
 
 						<PrivateRoute user={false} component={User} path="/auth/user/dashboard" />
-						<Route user={false} component={Tutorial} path="/course/:id" />
+						<Route component={Tutorial} path="/course/:id" />
 
             <Route path="/courses" component={ListCourses} exact />
             <Route path="/signup" component={SignUp} exact />
