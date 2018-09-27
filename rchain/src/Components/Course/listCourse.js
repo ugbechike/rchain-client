@@ -57,7 +57,7 @@ class ListCourses extends Component {
             console.log(err)
           })
       }else {
-        this.props.history.push('/login')
+        this.props.history.push(`/course/${id}`)
       }
 
     }

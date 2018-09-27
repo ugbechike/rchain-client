@@ -5,10 +5,9 @@ import {
   Header,
   List,
   Segment,
-  Responsive, 
+  Responsive,
   Label,
   Input,
-  Button, 
   TransitionablePortal,
   Icon
 } from 'semantic-ui-react';
@@ -29,7 +28,7 @@ class Footer extends Component {
   handleChange = (e) => {
     this.setState({
       email: e.target.value,
-      
+
     })
   }
 
@@ -49,7 +48,7 @@ class Footer extends Component {
           loading: false,
           disabled: false,
           transition: true,
-          
+
         })
       }
     })
@@ -79,7 +78,7 @@ class Footer extends Component {
               <Container>
                 <Grid inverted stackable style={{width: '100%'}}>
                   <Grid.Row>
-  
+
                     <Grid.Column width={5}>
                       <Header inverted as='h4' content='Popular Courses' />
                       <List link inverted>
@@ -89,14 +88,14 @@ class Footer extends Component {
                         <List.Item as="a" >RNode setup on a cloud machine</List.Item>
                       </List>
                     </Grid.Column>
-  
+
                     <Grid.Column width={5}>
                       <Header inverted as='h4' content='Who we are' />
                       <List link inverted>
                         <List.Item >About Us</List.Item>
                       </List>
                     </Grid.Column>
-  
+
                     <Grid.Column width={6}>
                       <Header inverted as='h4' content='Contact Us' />
                       <List link inverted>
@@ -111,32 +110,31 @@ class Footer extends Component {
                             <p>{message}</p>
                           </Segment>
                         </TransitionablePortal>
-                          <Input 
-                            labelPosition="right" 
-                            value={this.state.email}  
-                            placeholder='email@example.com'  
-                            type='email' 
+                          <Input
+                            labelPosition="right"
+                            value={this.state.email}
+                            placeholder='email@example.com'
+                            type='email'
                             onChange={this.handleChange}
                           >
                             <input />
-                            <Label 
+                            <Label
                               style={{
-                                cursor:'pointer', 
-                                color:'white', 
-                                border:'2px solid #b35959', 
-                                backgroundColor:'transparent' 
-                              }} 
-                              onClick={this.handleSubscribe} 
-                              loading={loading}>
+                                cursor:'pointer',
+                                color:'white',
+                                border:'2px solid #b35959',
+                                backgroundColor:'transparent'
+                              }}
+                              onClick={this.handleSubscribe}>
                               Subscribe
                             </Label>
                           </Input>
                         </List.Item>
                       </List>
                     </Grid.Column>
-  
+
                   </Grid.Row>
-  
+
                   <Grid.Row >
                     <Grid.Column width={16} style={{display: 'flex', justifyContent: 'center', marginTop: '20px'}}>
                         <Header inverted as='h4' content={`© ${new Date().getFullYear()} All Rights Reserved`} />
