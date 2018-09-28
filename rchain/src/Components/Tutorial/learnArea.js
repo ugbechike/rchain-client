@@ -6,7 +6,7 @@ class LearnArea extends Component {
 	render() {
 		return (
 			<div style={{marginTop: '70px', overFlowY: 'scroll'}}>
-		        <Video />
+				<Video />
 			</div>
 		);
 	}
