@@ -100,10 +100,10 @@ class Video extends Component {
 					    </Grid.Row>
 
 					    <Grid.Row columns={1}>
-				      	<Grid.Column width={16}>
-					        <Container fluid textAlign="justified">
-							    	<Commenting videoId={`${this.props.match.params.id}`} />
-							    </Container>
+							<Grid.Column width={16}>
+								<Container fluid textAlign="justified">
+									<Commenting videoId={`${this.props.match.params.id}`} />
+								</Container>
 						    </Grid.Column>
 					    </Grid.Row>
 					  </Grid>

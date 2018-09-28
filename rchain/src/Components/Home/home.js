@@ -36,7 +36,7 @@ export class Home extends PureComponent {
 
         <div style={{marginTop: '70px'}}>
           <Responsive style={header} minWidth={Responsive.onlyTablet.minWidth}>
-            <Carousel autoPlay>
+            <Carousel infiniteLoop={true}  autoPlay>
               <div>
                 <img src={slide2} alt='pix'/>
                 <p className="legend">Legend 1</p>

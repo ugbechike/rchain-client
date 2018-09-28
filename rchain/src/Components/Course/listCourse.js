@@ -31,6 +31,7 @@ class ListCourses extends Component {
     getCourses = () => {
         axios.get(`${API_URL}/video/get`)
             .then(res => {
+                console.log(res)
                 this.setState({
                     courses: res.data,
                     loading: false
