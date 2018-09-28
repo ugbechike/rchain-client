@@ -1,0 +1,118 @@
+import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
+import ReactPlayer from 'react-player';
+import { Responsive, Container, Header, Grid, Divider, Loader } from 'semantic-ui-react';
+import Commenting from './comment';
+import axios from 'axios';
+import { API_URL } from '../../config';
+
+class RnodeVideo extends Component {
+
+	state = {
+		video: []
+	}
+
+	componentDidMount() {
+		this.getVideo()
+
+		window.scrollTo(0, 0);
+	}
+
+	getVideo = () => {
+		axios.get(`${API_URL}/video/get/${this.props.match.params.id}`)
+			.then(res => {
+				this.setState({
+					video: res.data
+				})
+			})
+
+	}
+
+    render () {
+    	let { video } = this.state;
+
+	    return (
+	    	<div >
+		    	<Responsive minWidth={Responsive.onlyTablet.minWidth} >
+			      <div className='player-wrapper'>
+			        <ReactPlayer
+			          className='react-player'
+                      url={video.video}
+                      width= '640px'
+                      height= '360px'
+                      style={{margin: 'auto', border:'1px solid gray'}}
+			          loop={true}
+			          controls={true}
+			          onError={() => alert('error while playing video')}
+			        />
+			      </div>
+			      <Grid celled='internally' style={{marginTop: '0px', width: '100%'}} >
+					    <Grid.Row>
+						    <Grid.Column width={16}>
+						        <Container  fluid textAlign="justified" >
+								    <Header style={{width:'48%', margin:'auto'}}>
+							        <Header.Content>
+								      	{video.name}
+								      	<Divider />
+								      	<Header.Subheader>
+									        {video.description} - <a href={video.transcript} target="_blank">Download Transcript</a>
+												</Header.Subheader>
+									    </Header.Content>
+								    </Header>
+							    </Container>
+
+							    <Container>
+							    	<Commenting videoId={`${this.props.match.params.id}`} />
+							    </Container>
+
+						    </Grid.Column>
+					    </Grid.Row>
+					</Grid>
+			    </Responsive>
+
+			    <Responsive maxWidth={Responsive.onlyMobile.maxWidth} >
+				    <div className='player-wrapper'>
+				        <ReactPlayer
+				          className='react-player'
+				          url={video.video}
+				          width= '640px'
+                          height= '360px'
+                          style={{margin: 'auto', border:'1px solid gray'}}
+				          loop={true}
+				          controls={true}
+				          onError={() => alert('error while playing video')}
+				        />
+				    </div>
+
+					<Grid  style={{margin: '0px', width: '100%'}}>
+					    <Grid.Row>
+				      	<Grid.Column width={16}>
+					        <Container  fluid textAlign="justified" >
+								    <Header style={{width:'48%', margin:'auto'}}>
+								        <Header.Content>
+									      	{video.name}
+									      	<Divider />
+									      	<Header.Subheader>
+										        {video.description} - <a href={video.transcript} target="_blank">Download Transcript</a>
+													</Header.Subheader>
+										    </Header.Content>
+								    </Header>
+							    </Container>
+						    </Grid.Column>
+					    </Grid.Row>
+
+					    <Grid.Row columns={1}>
+							<Grid.Column width={16}>
+								<Container fluid textAlign="justified">
+									<Commenting videoId={`${this.props.match.params.id}`} />
+								</Container>
+						    </Grid.Column>
+					    </Grid.Row>
+					  </Grid>
+			    </Responsive>
+		    </div>
+	    )
+  }
+}
+
+export default withRouter(RnodeVideo);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TopNav from '../Menu/nav';
 import LearnArea from './learnArea';
+import RnodeLearn from './rnodeLearn'
 import PracticeArea from './practiceArea';
 import { Grid, Responsive } from 'semantic-ui-react';
 import { API_URL } from '../../config';
@@ -48,7 +49,7 @@ class Tutorial extends Component {
 									:	
 									<Grid.Row>
 										<Grid.Column width={16}>
-												<LearnArea />
+												<RnodeLearn />
 										</Grid.Column>
 									</Grid.Row>
 						} 

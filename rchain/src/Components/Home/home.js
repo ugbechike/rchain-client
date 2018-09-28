@@ -38,7 +38,7 @@ export class Home extends PureComponent {
           <Responsive style={header} minWidth={Responsive.onlyTablet.minWidth}>
             <Carousel infiniteLoop={true}  autoPlay>
               <div>
-                <img src={slide2} alt='pix'/>
+                <img src={slide1} alt='pix'/>
                 <p className="legend">Legend 1</p>
               </div>
               <div>
